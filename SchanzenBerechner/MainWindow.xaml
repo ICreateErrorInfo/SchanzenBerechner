@@ -8,9 +8,6 @@
         Title="Schanzen Rechner" Height="720" Width="1280">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
        <Grid ShowGridLines="true">
-            <Grid.LayoutTransform>
-                <ScaleTransform ScaleX="6" ScaleY="6"/>
-            </Grid.LayoutTransform>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
