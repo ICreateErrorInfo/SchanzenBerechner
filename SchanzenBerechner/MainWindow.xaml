@@ -27,7 +27,7 @@
             <ColumnDefinition Width="37"/>
             <ColumnDefinition Width="213*" MinWidth="200"/>
             <ColumnDefinition Width="330*" MinWidth="200"/>
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="31"/>
         </Grid.ColumnDefinitions>
         <Label Content="Absprung Winkel" Grid.Column="1" Grid.Row="1" FontSize="23" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="278" VerticalAlignment="Stretch"/>
         <TextBox Text="TextBox" Grid.Row="1" Grid.Column="2" FontSize="23" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"/>
