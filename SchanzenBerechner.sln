@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchanzenBerechner", "SchanzenBerechner\SchanzenBerechner.csproj", "{1CCBF5D5-1809-43D9-9C0B-672E8637E20F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CCBF5D5-1809-43D9-9C0B-672E8637E20F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CCBF5D5-1809-43D9-9C0B-672E8637E20F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CCBF5D5-1809-43D9-9C0B-672E8637E20F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CCBF5D5-1809-43D9-9C0B-672E8637E20F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4671FC6E-0795-4C70-8D72-84E79DCA4557}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,46 @@
+﻿<Window x:Class="SchanzenBerechner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SchanzenBerechner"
+        mc:Ignorable="d"
+        Title="Schanzen Rechner" Height="720" Width="1280">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+       <Grid ShowGridLines="true">
+            <Grid.LayoutTransform>
+                <ScaleTransform ScaleX="6" ScaleY="6"/>
+            </Grid.LayoutTransform>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="500*" MinHeight="200"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="269*" MinWidth="269"/>
+            <ColumnDefinition Width="330*" MinWidth="200"/>
+            <ColumnDefinition Width="37"/>
+            <ColumnDefinition Width="213*" MinWidth="200"/>
+            <ColumnDefinition Width="330*" MinWidth="200"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Absprung Winkel" Grid.Column="1" Grid.Row="1" FontSize="23" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="278" VerticalAlignment="Stretch"/>
+        <TextBox Text="TextBox" Grid.Row="1" Grid.Column="2" FontSize="23" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"/>
+        <Label Content="Sprung Höhe" Grid.Column="4" Grid.Row="1" FontSize="23" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="221"/>
+        <TextBox Text="TextBox" Grid.Row="1" Grid.Column="5" VerticalContentAlignment="Center" FontSize="23"/>
+        <Label Content="Absprung Geschwindikeit" Grid.Column="1" Grid.Row="2" FontSize="23" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,10,0,0" Grid.RowSpan="2" Width="278"/>
+        <TextBox Text="TextBox" Grid.Row="3" Grid.Column="2" VerticalContentAlignment="Center" FontSize="23" HorizontalAlignment="Stretch"/>
+        <Label Content="Sprung Enfernung" Grid.Column="4" Grid.Row="2" FontSize="23" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,10,0,0" Grid.RowSpan="2" Width="220"/>
+        <TextBox Text="TextBox" Grid.Row="3" Grid.Column="5" VerticalContentAlignment="Center" FontSize="23"/>
+
+        <Button Content="Button" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="5"/>
+
+    </Grid> 
+    </ScrollViewer>
+    
+</Window>
