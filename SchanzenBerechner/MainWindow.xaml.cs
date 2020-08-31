@@ -24,5 +24,10 @@ namespace SchanzenBerechner
         {
             InitializeComponent();
         }
+
+        private void OnBerechnenClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
