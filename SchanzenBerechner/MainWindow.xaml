@@ -9,7 +9,7 @@
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid>
             <Grid.RowDefinitions>
-            <RowDefinition Height="30*" MinHeight="10" MaxHeight="30"/>
+            <RowDefinition Height="30*" MinHeight="10" MaxHeight="30" />
             <RowDefinition Height="50"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="50"/>
