@@ -26,11 +26,11 @@ namespace SchanzenBerechner
 
         private void OnBerechnenClick(object sender, RoutedEventArgs e)
         {
-            double Geschwindigkeit = double.Parse(AbsprungGeschwindigkeitTextBox.Text);
-            double Winkel = double.Parse(AbsprungWinkelTextBox.Text);
+            double geschwindigkeit = double.Parse(AbsprungGeschwindigkeitTextBox.Text)/3.6;
+            double winkel = double.Parse(AbsprungWinkelTextBox.Text);
 
-            SprungHöheTextBox.Text = Berechne.Höhe(v0: Geschwindigkeit, alpha: Winkel).ToString();
-            SprungEntfernungTextBox.Text = Berechne.Weite(v0: Geschwindigkeit, alpha: Winkel).ToString();
+            SprungHöheTextBox.Text = Berechne.Höhe(v0: geschwindigkeit, alpha: winkel).ToString();
+            SprungEntfernungTextBox.Text = Berechne.Weite(v0: geschwindigkeit, alpha: winkel).ToString();
         }
     }
 }
