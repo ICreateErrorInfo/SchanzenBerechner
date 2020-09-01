@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +26,11 @@ namespace SchanzenBerechner
 
         private void OnBerechnenClick(object sender, RoutedEventArgs e)
         {
+            double Geschwindigkeit = double.Parse(AbsprungGeschwindigkeitTextBox.Text);
+            double Winkel = double.Parse(AbsprungWinkelTextBox.Text);
 
+            SprungHöheTextBox.Text = Berechne.Höhe(v0: Geschwindigkeit, alpha: Winkel).ToString();
+            SprungEntfernungTextBox.Text = Berechne.Weite(v0: Geschwindigkeit, alpha: Winkel).ToString();
         }
     }
 }
