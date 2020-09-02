@@ -28,10 +28,10 @@
                 <ColumnDefinition Width="330*" MinWidth="200"/>
                 <ColumnDefinition Width="30*" MinWidth="10" MaxWidth="30"/>
             </Grid.ColumnDefinitions>
-            <TextBox Name="AbsprungWinkelTextBox" Text="" Grid.Row="1" Grid.Column="2" FontSize="22" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"/>
-            <TextBox Name="SprungEntfernungTextBox" Text="" Grid.Row="1" Grid.Column="5" FontSize="22" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"/>
-            <TextBox Name="AbsprungGeschwindigkeitTextBox" Text="" Grid.Row="3" Grid.Column="2" FontSize="22" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"/>
-            <TextBox Name="SprungHöheTextBox" Text="" Grid.Row="3" Grid.Column="5" FontSize="22" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"/>
+            <TextBox Name="AbsprungWinkelTextBox" Text="0" Grid.Row="1" Grid.Column="2" FontSize="22" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"/>
+            <TextBox Name="SprungEntfernungTextBox" Text="0" Grid.Row="1" Grid.Column="5" FontSize="22" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"/>
+            <TextBox Name="AbsprungGeschwindigkeitTextBox" Text="0" Grid.Row="3" Grid.Column="2" FontSize="22" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"/>
+            <TextBox Name="SprungHöheTextBox" Text="0" Grid.Row="3" Grid.Column="5" FontSize="22" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"/>
 
             <Label Content="Absprung Winkel" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" FontSize="25" FontWeight="Bold"/>
             <Label Content="Absprung Geschwindigkeit" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" FontSize="25" FontWeight="Bold"/>

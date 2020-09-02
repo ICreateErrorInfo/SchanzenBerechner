@@ -6,7 +6,6 @@ namespace SchanzenBerechner
     {
         public static double Höhe(double v0, double alpha) //V0 Geschwindigeit, alpha schanzenwinkel
         {
-
             var t = Flugzeit(v0, alpha) / 2;
             var h = 0.5 * Naturkonstante.G * t * t;
 
@@ -24,10 +23,15 @@ namespace SchanzenBerechner
 
             return s;
         }
-        public static double Flugzeit(double v0, double alpha) //V0 Geschwindigeit, alpha schanzenwinkel
+        public static double Winkel(double v0, double ys)
         {
 
-
+            var ergebnis = Math.Asin(Math.Sqrt(ys * 2 * Naturkonstante.G / (v0 * v0)));
+            ergebnis = ergebnis * 180 / Math.PI;
+            return ergebnis;
+        }
+        public static double Flugzeit(double v0, double alpha) //V0 Geschwindigeit, alpha schanzenwinkel
+        {
             alpha = alpha * Math.PI / 180; //winkelmaß in Bogenmaß
 
             var vy = Math.Sin(alpha);
