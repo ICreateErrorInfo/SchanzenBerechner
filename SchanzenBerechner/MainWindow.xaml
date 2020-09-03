@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:SchanzenBerechner"
         ResizeMode="CanResizeWithGrip"
         mc:Ignorable="d"
-        Title="Schanzen Rechner" Height="800" Width="1024">
+        d:Height="800" d:Width="1024"
+        Title="Schanzen Rechner" >
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid>
 
