@@ -40,6 +40,9 @@ namespace SchanzenBerechner {
 
             pathGeometry.Figures.Add(figure);
             SchanzenPath.Data = pathGeometry;
+
+            Canvas.Width = berechnung.GetSchanzenEndPunkt().X;
+            Canvas.Height = berechnung.GetSchanzenAbsprungPunkt().Y;
         }
 
         public static readonly DependencyProperty SchanzenBerechnungProperty =

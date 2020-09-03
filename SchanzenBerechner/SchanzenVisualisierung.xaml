@@ -7,16 +7,19 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Viewbox Grid.Row="0">
-            <Canvas x:Name="Canvas" Width="100" Height="100">
+        <Canvas x:Name="Canvas"
+                Grid.Row="0"
+                Margin="10">
 
-                <Canvas.LayoutTransform>
-                    <ScaleTransform ScaleX="1" ScaleY="-1" />
-                </Canvas.LayoutTransform>
+            <Canvas.LayoutTransform>
+                <ScaleTransform ScaleX="1" ScaleY="-1" />
+            </Canvas.LayoutTransform>
 
-                <Path x:Name="SchanzenPath" Stroke="Black" StrokeThickness="1" Fill="Orange" />
-            </Canvas>
-        </Viewbox>
+            <Path x:Name="SchanzenPath"
+                  Stroke="Black"
+                  StrokeThickness="1"
+                  Fill="Orange" />
+        </Canvas>
     </Grid>
 
 </UserControl>
