@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SchanzenBerechner"
         ResizeMode="CanResizeWithGrip"
         mc:Ignorable="d"
-        Title="Schanzen Rechner" Height="720" Width="1280">
+        Title="Schanzen Rechner" Height="800" Width="1024">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid>
 
@@ -178,30 +178,14 @@
                 </TabItem>
             </TabControl>
             <Grid Grid.Row="1">
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="500*" MinHeight="200" />
                     <RowDefinition Height="30*" MinHeight="10" MaxHeight="30" />
                 </Grid.RowDefinitions>
 
                 <Viewbox Grid.Row="0">
-
-                    <Canvas Width="100" Height="100">
-                        <Canvas.LayoutTransform>
-                            <ScaleTransform ScaleX="1" ScaleY="-1" CenterX=".5" CenterY=".5" />
-                        </Canvas.LayoutTransform>
-                        <Path Stroke="Black" StrokeThickness="1" Fill="Orange">
-                            <Path.Data>
-                                <PathGeometry>
-                                    <PathFigure IsClosed="true">
-                                        <LineSegment Point="0,0" />
-                                        <LineSegment Point="100,0" />
-                                        <LineSegment Point="100,20" />
-                                        <ArcSegment Size="300,300" Point="0,0" />
-                                    </PathFigure>
-                                </PathGeometry>
-                            </Path.Data>
-                        </Path>
-                    </Canvas>
+                    <local:SchanzenVisualisierung x:Name="SchanzenVisualisierung"/>
                 </Viewbox>
             </Grid>
 
