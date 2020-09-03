@@ -24,16 +24,25 @@ namespace SchanzenBerechner
             InitializeComponent();
         }
 
-        private void OnBerechnenClick(object sender, RoutedEventArgs e)
+        private void OnBerechnenClickTab1(object sender, RoutedEventArgs e)
         {
-            double geschwindigkeit = double.Parse(AbsprungGeschwindigkeitTextBox.Text)/3.6;
-            //double winkel = double.Parse(AbsprungWinkelTextBox.Text);
-            double höhe = double.Parse(SprungHöheTextBox.Text);
-            //double entfernugn = double.Parse(SprungEntfernungTextBox.Text);
+            double winkel = double.Parse(AbsprungWinkelTextBox_Tab1.Text);
+            double geschwindigkeit = double.Parse(AbsprungGeschwindigkeitTextBox_Tab1.Text)/3.6;
 
-            //SprungHöheTextBox.Text = Berechne.Höhe(v0: geschwindigkeit, alpha: winkel).ToString();
-            //SprungEntfernungTextBox.Text = Berechne.Weite(v0: geschwindigkeit, alpha: winkel).ToString();
-            AbsprungWinkelTextBox.Text = Berechne.Winkel(geschwindigkeit, höhe).ToString();
+            SprungHöheText_Tab1.Content = Berechne.Höhe(v0: geschwindigkeit, alpha: winkel);
+            SprungEntfernungText_Tab1.Content = Berechne.Weite(v0: geschwindigkeit, alpha: winkel);
+        }
+
+        private void OnBerechneClickTab2(object sender, RoutedEventArgs e)
+        {
+            double höhe = double.Parse(SprungHöheTextBox_Tab2.Text);
+            double geschwindigkeit = double.Parse(AbsprungGeschwindigkeitTextBox_Tab2.Text)/3.6;
+
+            AbsprungWinkelText_Tab2.Content = Berechne.Winkel(v0: geschwindigkeit, ys: höhe);
+        }
+        private void OnBerechneClickTab3(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

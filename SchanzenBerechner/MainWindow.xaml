@@ -15,8 +15,8 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <TabControl Grid.Row="0">
-                <TabItem Header="Berechnen">
 
+                <TabItem Header="Entfernung u. Höhe" FontSize="18" FontWeight="Bold">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30*" MinHeight="10" MaxHeight="30" />
@@ -37,33 +37,145 @@
                             <ColumnDefinition Width="330*" MinWidth="200" />
                             <ColumnDefinition Width="30*" MinWidth="10" MaxWidth="30" />
                         </Grid.ColumnDefinitions>
-                        <TextBox Name="AbsprungWinkelTextBox" Text="0" Grid.Row="1" Grid.Column="2" FontSize="22"
+
+                        <TextBox Name="AbsprungWinkelTextBox_Tab1" Text="0" Grid.Row="1" Grid.Column="2" FontSize="22"
                                  HorizontalAlignment="Stretch" VerticalContentAlignment="Center" />
-                        <TextBox Name="SprungEntfernungTextBox" Text="0" Grid.Row="1" Grid.Column="5" FontSize="22"
-                                 HorizontalAlignment="Stretch" VerticalContentAlignment="Center" />
-                        <TextBox Name="AbsprungGeschwindigkeitTextBox" Text="0" Grid.Row="3" Grid.Column="2"
+                        
+                        <TextBox Name="AbsprungGeschwindigkeitTextBox_Tab1" Text="0" Grid.Row="3" Grid.Column="2"
                                  FontSize="22" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" />
-                        <TextBox Name="SprungHöheTextBox" Text="0" Grid.Row="3" Grid.Column="5" FontSize="22"
+                        
+
+                        <Label Name="SprungHöheText_Tab1" Content="0" Grid.Row="3" Grid.Column="5" HorizontalAlignment="Stretch"
+                               VerticalContentAlignment="Center" FontSize="22" FontWeight="Bold" />
+                        
+                        <Label Name="SprungEntfernungText_Tab1" Content="0" Grid.Row="1" Grid.Column="5" HorizontalAlignment="Stretch"
+                               VerticalContentAlignment="Center" FontSize="22" FontWeight="Bold" />
+                        
+                        <Label Content="Absprung Winkel" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                               VerticalContentAlignment="Center" FontSize="25" FontWeight="Bold" />
+                        
+                        <Label Content="Absprung Geschwindigkeit" Grid.Row="3" Grid.Column="1"
+                               HorizontalAlignment="Stretch" VerticalContentAlignment="Center" FontSize="25"
+                               FontWeight="Bold" />
+                        
+                        <Label Content="Sprung Höhe" Grid.Row="3" Grid.Column="4" HorizontalAlignment="Stretch"
+                               VerticalContentAlignment="Center" FontSize="25" FontWeight="Bold" />
+                        
+                        <Label Content="Sprung Entfernung" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Stretch"
+                               VerticalContentAlignment="Center" FontSize="25" FontWeight="Bold" />
+
+                        <Button Content="Berechnen" Grid.Column="5" Grid.Row="5" FontSize="30" FontWeight="Bold"
+                                Click="OnBerechnenClickTab1"/>
+
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Winkel" FontSize="18" FontWeight="Bold">
+                    
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30*" MinHeight="10" MaxHeight="30" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="10" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="10" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="10" />
+
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*" MinWidth="10" MaxWidth="30" />
+                            <ColumnDefinition Width="269*" MinWidth="269" />
+                            <ColumnDefinition Width="330*" MinWidth="200" />
+                            <ColumnDefinition Width="37" />
+                            <ColumnDefinition Width="213*" MinWidth="200" />
+                            <ColumnDefinition Width="330*" MinWidth="200" />
+                            <ColumnDefinition Width="30*" MinWidth="10" MaxWidth="30" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBox Name="AbsprungGeschwindigkeitTextBox_Tab2" Text="0" Grid.Row="3" Grid.Column="2"
+                                 FontSize="22" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" />
+                        
+                        <TextBox Name="SprungHöheTextBox_Tab2" Text="0" Grid.Row="3" Grid.Column="5" FontSize="22"
                                  HorizontalAlignment="Stretch" VerticalContentAlignment="Center" />
+                        
+
+                        <Label Name="SprungEntfernungText_Tab2" Content="0" Grid.Row="1" Grid.Column="5" HorizontalAlignment="Stretch"
+                               VerticalContentAlignment="Center" FontSize="22" FontWeight="Bold" />
+                        
+                        <Label Name="AbsprungWinkelText_Tab2" Content="0" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch"
+                               VerticalContentAlignment="Center" FontSize="22" FontWeight="Bold" />
+                        
+                        <Label Content="Absprung Winkel" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                               VerticalContentAlignment="Center" FontSize="25" FontWeight="Bold" />
+                        
+                        <Label Content="Absprung Geschwindigkeit" Grid.Row="3" Grid.Column="1"
+                               HorizontalAlignment="Stretch" VerticalContentAlignment="Center" FontSize="25"
+                               FontWeight="Bold" />
+                        
+                        <Label Content="Sprung Höhe" Grid.Row="3" Grid.Column="4" HorizontalAlignment="Stretch"
+                               VerticalContentAlignment="Center" FontSize="25" FontWeight="Bold" />
+
+                        <Label Content="Sprung Entfernung" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Stretch"
+                               VerticalContentAlignment="Center" FontSize="25" FontWeight="Bold" />
+
+                        <Button Content="Berechnen" Grid.Column="5" Grid.Row="5" FontSize="30" FontWeight="Bold"
+                                Click="OnBerechneClickTab2" />
+                    </Grid>
+                    
+                </TabItem>
+                <TabItem Header="Geschwindikeit" FontSize="18" FontWeight="Bold">
+                    
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30*" MinHeight="10" MaxHeight="30" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="10" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="10" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="10" />
+
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*" MinWidth="10" MaxWidth="30" />
+                            <ColumnDefinition Width="269*" MinWidth="269" />
+                            <ColumnDefinition Width="330*" MinWidth="200" />
+                            <ColumnDefinition Width="37" />
+                            <ColumnDefinition Width="213*" MinWidth="200" />
+                            <ColumnDefinition Width="330*" MinWidth="200" />
+                            <ColumnDefinition Width="30*" MinWidth="10" MaxWidth="30" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Name="AbsprungWinkelTextBox_Tab3" Text="0" Grid.Row="1" Grid.Column="2" FontSize="22"
+                                 HorizontalAlignment="Stretch" VerticalContentAlignment="Center" />
+                        
+                        <TextBox Name="SprungEntfernungTextBox_Tab3" Text="0" Grid.Row="1" Grid.Column="5" FontSize="22"
+                                 HorizontalAlignment="Stretch" VerticalContentAlignment="Center" />
+                        
+                        <TextBox Name="AbsprungGeschwindigkeitTextBox_Tab3" Text="0" Grid.Row="3" Grid.Column="2"
+                                 FontSize="22" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" />
+                        
+                        <TextBox Name="SprungHöheTextBox_Tab3" Text="0" Grid.Row="3" Grid.Column="5" FontSize="22"
+                                 HorizontalAlignment="Stretch" VerticalContentAlignment="Center" />
+                        
 
                         <Label Content="Absprung Winkel" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
                                VerticalContentAlignment="Center" FontSize="25" FontWeight="Bold" />
+                        
                         <Label Content="Absprung Geschwindigkeit" Grid.Row="3" Grid.Column="1"
                                HorizontalAlignment="Stretch" VerticalContentAlignment="Center" FontSize="25"
                                FontWeight="Bold" />
                         <Label Content="Sprung Höhe" Grid.Row="3" Grid.Column="4" HorizontalAlignment="Stretch"
                                VerticalContentAlignment="Center" FontSize="25" FontWeight="Bold" />
+
                         <Label Content="Sprung Entfernung" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Stretch"
                                VerticalContentAlignment="Center" FontSize="25" FontWeight="Bold" />
 
                         <Button Content="Berechnen" Grid.Column="5" Grid.Row="5" FontSize="30" FontWeight="Bold"
-                                Click="OnBerechnenClick" />
-
+                                Click="OnBerechneClickTab3" />
                     </Grid>
 
                 </TabItem>
-                <TabItem Header="Test" />
-                <TabItem Header="Test" />
             </TabControl>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
