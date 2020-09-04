@@ -1,9 +1,19 @@
 ﻿using System;
 
-namespace SchanzenBerechner
+namespace Berechnung
 {
-    class Berechne
-    {
+    public static class  Berechne {
+
+        /// <summary>
+        /// Umrechnung von Radiant zu Grad 
+        /// </summary>
+        public static double ToDeg(double rad) => rad * 180 / Math.PI;
+
+        /// <summary>
+        /// Umrechnung von Grad in Radiant.
+        /// </summary>
+        public static double ToRad(double deg) => deg * Math.PI / 180;
+
         public static double Höhe(double v0, double alpha) //V0 Geschwindigeit, alpha schanzenwinkel
         {
             var t = Flugzeit(v0, alpha) / 2;
@@ -38,6 +48,14 @@ namespace SchanzenBerechner
             vy = vy * v0;
             var t = vy / Naturkonstante.G;
             return t * 2;
+        }
+
+        public static double Y(double x, double v0, double alpha, double y0) {
+
+            var y = -(x * x) / (2 * v0 * v0 * Math.Cos(alpha) * Math.Cos(alpha)) + Math.Tan(alpha) * x + y0;
+
+            return y;
+
         }
 
     }

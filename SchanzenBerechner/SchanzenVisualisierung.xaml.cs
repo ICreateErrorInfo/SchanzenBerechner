@@ -12,8 +12,8 @@ namespace SchanzenBerechner {
             InitializeComponent();
         }
 
-        public SchanzenBerechnung SchanzenBerechnung {
-            get => (SchanzenBerechnung) GetValue(SchanzenBerechnungProperty);
+        public Schanze Schanze {
+            get => (Schanze) GetValue(SchanzenBerechnungProperty);
             set => SetValue(SchanzenBerechnungProperty, value);
         }
 
@@ -21,7 +21,7 @@ namespace SchanzenBerechner {
 
             SchanzenPath.Data = null;
 
-            var berechnung = SchanzenBerechnung;
+            var berechnung = Schanze;
             if (berechnung == null) {
                 return;
             }
@@ -47,8 +47,8 @@ namespace SchanzenBerechner {
 
         public static readonly DependencyProperty SchanzenBerechnungProperty =
             DependencyProperty.Register(
-                name: nameof(SchanzenBerechnung),
-                propertyType: typeof(SchanzenBerechnung),
+                name: nameof(Schanze),
+                propertyType: typeof(Schanze),
                 ownerType: typeof(SchanzenVisualisierung),
                 typeMetadata: new FrameworkPropertyMetadata(
                     defaultValue: null,

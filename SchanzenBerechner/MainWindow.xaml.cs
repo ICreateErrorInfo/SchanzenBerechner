@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 using Berechnung;
 
@@ -32,14 +20,15 @@ namespace SchanzenBerechner
             double winkel          = double.Parse(AbsprungWinkelTextBox_Tab1.Text);
             double geschwindigkeit = double.Parse(AbsprungGeschwindigkeitTextBox_Tab1.Text) / 3.6;
             double höhe            = Berechne.Höhe(v0: geschwindigkeit, alpha: winkel);
+            double schanzenHöhe    = 0.16; // TODO Schanzenhöhe...
 
             SprungHöheText_Tab1.Content       = höhe;
             SprungEntfernungText_Tab1.Content = Berechne.Weite(v0: geschwindigkeit, alpha: winkel);
+            
+            var schanze  = Schanze.Create(schanzenHöhe, Berechne.ToRad(winkel));
+            var flugbahn = Flugbahn.Create(schanze, geschwindigkeit);
 
-            // TODO Schanzenhöhe...
-            var berechnung = SchanzenBerechnung.Berechne(0.16, winkel * Math.PI / 180);
-
-            SchanzenVisualisierung.SchanzenBerechnung = berechnung;
+            SchanzenVisualisierung.Schanze = schanze;
         }
 
         private void OnBerechneClickTab2(object sender, RoutedEventArgs e)

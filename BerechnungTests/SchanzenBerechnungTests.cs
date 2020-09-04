@@ -15,7 +15,7 @@ namespace BerechnungTests {
             var winkel     = 19;
             var rad        = winkel * Math.PI / 180;
             var höhe       = 0.16;
-            var berechnung = SchanzenBerechnung.Berechne(höhe, winkel * Math.PI / 180);
+            var berechnung = Schanze.Create(höhe, winkel * Math.PI / 180);
 
             Assert.That(berechnung,                   Is.Not.Null);
             Assert.That(berechnung.Höhe,              Is.EqualTo(höhe));

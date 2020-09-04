@@ -1,4 +1,4 @@
-﻿namespace SchanzenBerechner
+﻿namespace Berechnung
 {
     public static class Naturkonstante
     {
