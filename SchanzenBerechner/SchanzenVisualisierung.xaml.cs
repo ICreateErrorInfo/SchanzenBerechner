@@ -82,7 +82,7 @@ namespace SchanzenBerechner {
         }
 
         static Size CalculateDesiredCanvasSize(Schanze schanze, Flugbahn flugbahn) {
-            
+
             var width  = 1.0;
             var height = 1.0;
 
@@ -105,8 +105,7 @@ namespace SchanzenBerechner {
                 return null;
             }
 
-            var pathGeometry = new PathGeometry();
-            var figure       = new PathFigure {IsClosed = true};
+            var figure = new PathFigure {IsClosed = true};
 
             figure.Segments.Add(new LineSegment {Point = schanze.SchanzenStartPunkt});
             figure.Segments.Add(new LineSegment {Point = schanze.EndPunkt});
@@ -117,6 +116,7 @@ namespace SchanzenBerechner {
 
             });
 
+            var pathGeometry = new PathGeometry();
             pathGeometry.Figures.Add(figure);
             return pathGeometry;
         }
@@ -130,11 +130,10 @@ namespace SchanzenBerechner {
             var segments = 100;
             var step     = (int) flugbahn.SprungWeite / segments;
 
-            var pathGeometry = new PathGeometry();
-            var figure       = new PathFigure {IsClosed = false};
+            // Horizontaler Offset, wenn Schnaze vorhanden
+            var x0 = schanze?.AbsprungPunkt.X ?? 0;
 
-            // Horizontaler Offset
-            var x0 = schanze.AbsprungPunkt.X;
+            var figure = new PathFigure {IsClosed = false};
 
             // Absprungpunkt
             var x = 0.0;
@@ -155,6 +154,7 @@ namespace SchanzenBerechner {
             y = flugbahn.Y(x);
             figure.Segments.Add(new LineSegment {Point = new Point(x0 + x, y)});
 
+            var pathGeometry = new PathGeometry();
             pathGeometry.Figures.Add(figure);
 
             return pathGeometry;
