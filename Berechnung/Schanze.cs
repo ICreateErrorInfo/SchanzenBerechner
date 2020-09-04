@@ -9,12 +9,16 @@ namespace Berechnung {
         private readonly double _höhe;
         private readonly double _radius;
 
-        Schanze(double länge, double höhe, double absprungwinkelRad, double radius, double scale) {
-            _länge            = länge;
-            _höhe             = höhe;
-            AbsprungwinkelRad = absprungwinkelRad;
-            _radius           = radius;
-            Scale             = scale;
+        Schanze(double länge,
+                double höhe,
+                Winkel absprungwinkel,
+                double radius, double scale) {
+
+            _länge         = länge;
+            _höhe          = höhe;
+            Absprungwinkel = absprungwinkel;
+            _radius        = radius;
+            Scale          = scale;
 
         }
 
@@ -22,8 +26,7 @@ namespace Berechnung {
         public double Höhe   => _höhe   * Scale;
         public double Radius => _radius * Scale;
 
-        public double AbsprungwinkelRad { get; }
-        public double AbsprungwinkelDeg => Winkel.ToDeg(AbsprungwinkelRad);
+        public Winkel Absprungwinkel { get; }
 
         public double Scale { get; }
 
@@ -39,20 +42,20 @@ namespace Berechnung {
             return new Schanze(
                 länge: Länge,
                 höhe: Höhe,
-                absprungwinkelRad: AbsprungwinkelRad,
+                absprungwinkel: Absprungwinkel,
                 radius: Radius,
                 scale: scale);
         }
 
-        public static Schanze Create(double höhe, double absprungwinkel) {
+        public static Schanze Create(double höhe, Winkel absprungwinkel) {
 
-            var radius = höhe   / (1 - Math.Cos(absprungwinkel));
-            var länge  = radius * Math.Sin(absprungwinkel);
+            var radius = höhe   / (1 - Math.Cos(absprungwinkel.Rad));
+            var länge  = radius * Math.Sin(absprungwinkel.Rad);
 
             return new Schanze(
                 länge: länge,
                 höhe: höhe,
-                absprungwinkelRad: absprungwinkel,
+                absprungwinkel: absprungwinkel,
                 radius: radius,
                 scale: 1
             );

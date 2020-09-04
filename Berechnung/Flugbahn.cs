@@ -7,14 +7,14 @@
         private readonly double _sprungHöhe;
 
         Flugbahn(double absprungHöhe,
-                 double absprungWinkel,
+                 Winkel absprungWinkel,
                  double absprungGeschwindigkeit,
                  double sprungWeite,
                  double sprungHöhe,
                  double scale) {
 
             _absprungHöhe           = absprungHöhe;
-            AbsprungWinkelRad       = absprungWinkel;
+            AbsprungWinkel          = absprungWinkel;
             AbsprungGeschwindigkeit = absprungGeschwindigkeit;
             _sprungWeite            = sprungWeite;
             _sprungHöhe             = sprungHöhe;
@@ -27,8 +27,7 @@
         public double SprungHöhe   => _sprungHöhe   * Scale;
 
         public double AbsprungGeschwindigkeit { get; }
-        public double AbsprungWinkelRad       { get; }
-        public double AbsprungWinkelDeg       => Winkel.ToDeg(AbsprungWinkelRad);
+        public Winkel AbsprungWinkel          { get; }
 
         public double Scale { get; }
 
@@ -36,14 +35,14 @@
             return SchrägerWurf.Y(
                 x: x / Scale,
                 v0: AbsprungGeschwindigkeit,
-                alpha: AbsprungWinkelRad,
+                alpha: AbsprungWinkel.Rad,
                 y0: _absprungHöhe) * Scale;
         }
 
         public Flugbahn WithScale(double scale) {
             return new Flugbahn(
                 absprungHöhe: AbsprungHöhe,
-                absprungWinkel: AbsprungWinkelRad,
+                absprungWinkel: AbsprungWinkel,
                 absprungGeschwindigkeit: AbsprungGeschwindigkeit,
                 sprungWeite: SprungWeite,
                 sprungHöhe: SprungHöhe,
@@ -56,18 +55,18 @@
 
             var weite = SchrägerWurf.Weite(
                 v0: absprungGeschwindigkeit,
-                alpha: schanze.AbsprungwinkelRad);
+                alpha: schanze.Absprungwinkel.Rad);
 
             var höhe = SchrägerWurf.Höhe(
                 v0: absprungGeschwindigkeit,
-                alpha: schanze.AbsprungwinkelRad);
+                alpha: schanze.Absprungwinkel.Rad);
 
             // TODO Bug in Höhenberechnung...
             höhe += schanze.Höhe;
 
             return new Flugbahn(
                 absprungHöhe: schanze.Höhe,
-                absprungWinkel: schanze.AbsprungwinkelRad,
+                absprungWinkel: schanze.Absprungwinkel,
                 absprungGeschwindigkeit: absprungGeschwindigkeit,
                 sprungWeite: weite,
                 sprungHöhe: höhe,
