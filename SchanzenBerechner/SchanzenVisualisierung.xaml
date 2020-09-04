@@ -8,28 +8,25 @@
              Background="GhostWhite"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Viewbox Grid.Row="0">
-            <Canvas x:Name="Canvas"
-                    SnapsToDevicePixels="true"
+        <Canvas Grid.Row="0" x:Name="Canvas"
+                UseLayoutRounding="true"
+                SnapsToDevicePixels = "true"
+                Margin="10">
 
-                    Margin="10">
+            <Canvas.LayoutTransform>
+                <ScaleTransform ScaleX="1" ScaleY="-1" />
+            </Canvas.LayoutTransform>
 
-                <Canvas.LayoutTransform>
-                    <ScaleTransform ScaleX="1" ScaleY="-1" />
-                </Canvas.LayoutTransform>
+            <Path x:Name="SchanzenPath"
+                  Stroke="Black"
+                  StrokeThickness="2"
+                  Fill="Orange" />
 
-                <Path x:Name="SchanzenPath"
-                      Stroke="Black"
-                      StrokeThickness="2"
-
-                      Fill="Orange" />
-
-                <Path x:Name="FlugbahnPath"
-                      Stroke="Black"
-                      StrokeDashArray="4 4"
-                      StrokeThickness="2" />
-            </Canvas>
-        </Viewbox>
+            <Path x:Name="FlugbahnPath"
+                  Stroke="Black"
+                  StrokeDashArray="4 4"
+                  StrokeThickness="2" />
+        </Canvas>
     </Grid>
 
 </UserControl>

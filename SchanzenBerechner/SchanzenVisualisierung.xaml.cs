@@ -136,7 +136,7 @@ namespace SchanzenBerechner {
             // Horizontaler Offset
             var x0 = schanze.AbsprungPunkt.X;
 
-            // Absprunkpunkt
+            // Absprungpunkt
             var x = 0.0;
             var y = flugbahn.Y(x);
             figure.Segments.Add(new LineSegment {Point = new Point(x0 + x, y), IsStroked = false});
