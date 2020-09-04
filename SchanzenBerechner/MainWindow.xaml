@@ -184,10 +184,9 @@
                     <RowDefinition Height="500*" MinHeight="200" />
                     <RowDefinition Height="30*" MinHeight="10" MaxHeight="30" />
                 </Grid.RowDefinitions>
+               
+                <local:SchanzenVisualisierung Grid.Row="0" x:Name="SchanzenVisualisierung"/>
 
-                <Viewbox Grid.Row="0">
-                    <local:SchanzenVisualisierung x:Name="SchanzenVisualisierung"/>
-                </Viewbox>
             </Grid>
 
         </Grid>

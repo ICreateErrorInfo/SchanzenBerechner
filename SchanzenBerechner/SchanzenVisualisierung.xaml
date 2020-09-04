@@ -5,27 +5,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SchanzenBerechner"
              mc:Ignorable="d"
+             Background="GhostWhite"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Canvas x:Name="Canvas"
-                Grid.Row="0"
-                Background="AliceBlue"
-                Margin="10">
+        <Viewbox Grid.Row="0">
+            <Canvas x:Name="Canvas"
+                    SnapsToDevicePixels="true"
 
-            <Canvas.LayoutTransform>
-                <ScaleTransform ScaleX="1" ScaleY="-1" />
-            </Canvas.LayoutTransform>
+                    Margin="10">
 
-            <Path x:Name="SchanzenPath"
-                  Stroke="Black"
-                  StrokeThickness="1"
-                  Fill="Orange" />
+                <Canvas.LayoutTransform>
+                    <ScaleTransform ScaleX="1" ScaleY="-1" />
+                </Canvas.LayoutTransform>
 
-            <Path x:Name="FlugbahnPath"
-                  Stroke="Black"
-                  StrokeDashArray="4 4"
-                  StrokeThickness="1" />
-        </Canvas>
+                <Path x:Name="SchanzenPath"
+                      Stroke="Black"
+                      StrokeThickness="2"
+
+                      Fill="Orange" />
+
+                <Path x:Name="FlugbahnPath"
+                      Stroke="Black"
+                      StrokeDashArray="4 4"
+                      StrokeThickness="2" />
+            </Canvas>
+        </Viewbox>
     </Grid>
 
 </UserControl>
