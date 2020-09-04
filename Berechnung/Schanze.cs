@@ -23,7 +23,7 @@ namespace Berechnung {
         public double Radius => _radius * Scale;
 
         public double AbsprungwinkelRad { get; }
-        public double AbsprungwinkelDeg => Berechne.ToDeg(AbsprungwinkelRad);
+        public double AbsprungwinkelDeg => Winkel.ToDeg(AbsprungwinkelRad);
 
         public double Scale { get; }
 

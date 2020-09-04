@@ -11,7 +11,7 @@ namespace BerechnungTests {
         public void Test1() {
 
             var winkelDeg  = 19;
-            var winkelRad  = Berechne.ToRad(winkelDeg);
+            var winkelRad  = Winkel.ToRad(winkelDeg);
             var höhe       = 0.16;
             var berechnung = Schanze.Create(höhe, winkelRad);
 

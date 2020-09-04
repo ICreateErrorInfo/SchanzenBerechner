@@ -28,12 +28,12 @@
 
         public double AbsprungGeschwindigkeit { get; }
         public double AbsprungWinkelRad       { get; }
-        public double AbsprungWinkelDeg       => Berechne.ToDeg(AbsprungWinkelRad);
+        public double AbsprungWinkelDeg       => Winkel.ToDeg(AbsprungWinkelRad);
 
         public double Scale { get; }
 
         public double Y(double x) {
-            return Berechne.Y(
+            return SchrägerWurf.Y(
                 x: x / Scale,
                 v0: AbsprungGeschwindigkeit,
                 alpha: AbsprungWinkelRad,
@@ -54,11 +54,11 @@
             Schanze schanze,
             double absprungGeschwindigkeit) {
 
-            var weite = Berechne.Weite(
+            var weite = SchrägerWurf.Weite(
                 v0: absprungGeschwindigkeit,
                 alpha: schanze.AbsprungwinkelRad);
 
-            var höhe = Berechne.Höhe(
+            var höhe = SchrägerWurf.Höhe(
                 v0: absprungGeschwindigkeit,
                 alpha: schanze.AbsprungwinkelRad);
 
