@@ -19,6 +19,10 @@
                   Stroke="Black"
                   StrokeThickness="1"
                   Fill="Orange" />
+
+            <Path x:Name="FlugbahnPath"
+                  Stroke="Black"
+                  StrokeThickness="1" />
         </Canvas>
     </Grid>
 

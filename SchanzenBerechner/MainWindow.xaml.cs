@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
 using Berechnung;
 
@@ -28,7 +27,8 @@ namespace SchanzenBerechner
             var schanze  = Schanze.Create(schanzenHöhe, Berechne.ToRad(winkel));
             var flugbahn = Flugbahn.Create(schanze, geschwindigkeit);
 
-            SchanzenVisualisierung.Schanze = schanze;
+            SchanzenVisualisierung.Schanze  = schanze;
+            SchanzenVisualisierung.Flugbahn = flugbahn;
         }
 
         private void OnBerechneClickTab2(object sender, RoutedEventArgs e)
