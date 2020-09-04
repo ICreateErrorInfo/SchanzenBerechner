@@ -17,14 +17,15 @@ namespace SchanzenBerechner
         private void OnBerechnenClickTab1(object sender, RoutedEventArgs e) 
         {
             double winkel          = double.Parse(AbsprungWinkelTextBox_Tab1.Text);
+            double winkelRad       = Berechne.ToRad(winkel);
             double geschwindigkeit = double.Parse(AbsprungGeschwindigkeitTextBox_Tab1.Text) / 3.6;
-            double höhe            = Berechne.Höhe(v0: geschwindigkeit, alpha: winkel);
+            double höhe            = Berechne.Höhe(v0: geschwindigkeit, alpha: winkelRad);
             double schanzenHöhe    = 0.16; // TODO Schanzenhöhe...
 
             SprungHöheText_Tab1.Content       = höhe;
-            SprungEntfernungText_Tab1.Content = Berechne.Weite(v0: geschwindigkeit, alpha: winkel);
+            SprungEntfernungText_Tab1.Content = Berechne.Weite(v0: geschwindigkeit, alpha:winkelRad);
             
-            var schanze  = Schanze.Create(schanzenHöhe, Berechne.ToRad(winkel));
+            var schanze  = Schanze.Create(schanzenHöhe, winkelRad);
             var flugbahn = Flugbahn.Create(schanze, geschwindigkeit);
 
             SchanzenVisualisierung.Schanze  = schanze;

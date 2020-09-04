@@ -62,7 +62,10 @@ namespace SchanzenBerechner {
 
         void Refesh() {
 
-            var scale = 100.0;
+            var orgSize = CalculateDesiredCanvasSize(Schanze, Flugbahn);
+            // Wir sagen es soll alles auf 1000 Pixel Platz haben...
+            var scale = 1000 / orgSize.Width;
+         //   var scale = 1000.0;
 
             var schanze  = Schanze?.WithScale(scale);
             var flugbahn = Flugbahn?.WithScale(scale);
@@ -76,8 +79,8 @@ namespace SchanzenBerechner {
         }
 
         static Size CalculateDesiredCanvasSize(Schanze schanze, Flugbahn flugbahn) {
-            var width  = .0;
-            var height = .0;
+            var width  = 10.0;
+            var height = 10.0;
             if (schanze != null) {
                 width  = schanze.EndPunkt.X;
                 height = schanze.AbsprungPunkt.Y;

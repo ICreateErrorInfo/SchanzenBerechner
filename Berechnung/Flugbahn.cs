@@ -53,7 +53,7 @@
                 absprungWinkel: schanze.AbsprungwinkelRad,
                 absprungGeschwindigkeit: absprungGeschwindigkeit,
                 sprungWeite: weite,
-                scale: .0);
+                scale: 1);
         }
 
     }
