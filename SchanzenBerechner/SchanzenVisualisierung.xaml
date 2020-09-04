@@ -9,6 +9,7 @@
     <Grid>
         <Canvas x:Name="Canvas"
                 Grid.Row="0"
+                Background="AliceBlue"
                 Margin="10">
 
             <Canvas.LayoutTransform>
@@ -22,6 +23,7 @@
 
             <Path x:Name="FlugbahnPath"
                   Stroke="Black"
+                  StrokeDashArray="4 4"
                   StrokeThickness="1" />
         </Canvas>
     </Grid>

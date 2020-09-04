@@ -1,4 +1,6 @@
-﻿using Berechnung;
+﻿using System;
+
+using Berechnung;
 
 using System.Windows;
 using System.Windows.Controls;
@@ -64,14 +66,15 @@ namespace SchanzenBerechner {
 
             var orgSize = CalculateDesiredCanvasSize(Schanze, Flugbahn);
             // Wir sagen es soll alles auf 1000 Pixel Platz haben...
+
             var scale = 1000 / orgSize.Width;
-         //   var scale = 1000.0;
+            //   var scale = 1000.0;
 
             var schanze  = Schanze?.WithScale(scale);
             var flugbahn = Flugbahn?.WithScale(scale);
 
             SchanzenPath.Data = CreateSchanzenGeometry(schanze);
-            FlugbahnPath.Data = CreateFlugbahnGeometry(flugbahn);
+            FlugbahnPath.Data = CreateFlugbahnGeometry(schanze, flugbahn);
 
             var size = CalculateDesiredCanvasSize(schanze, flugbahn);
             Canvas.Width  = size.Width;
@@ -87,8 +90,8 @@ namespace SchanzenBerechner {
             }
 
             if (flugbahn != null) {
-                width += flugbahn.SprungWeite;
-                //height=Math TODO..
+                width  += flugbahn.SprungWeite;
+                height =  Math.Max(flugbahn.SprungHöhe, height);
             }
 
             return new Size(width, height);
@@ -116,13 +119,34 @@ namespace SchanzenBerechner {
             return pathGeometry;
         }
 
-        private static PathGeometry CreateFlugbahnGeometry(Flugbahn flugbahn) {
+        private static PathGeometry CreateFlugbahnGeometry(Schanze schanze, Flugbahn flugbahn) {
 
             if (flugbahn == null) {
                 return null;
             }
 
-            return null;
+            var segments = 100;
+            var step     = (int) flugbahn.SprungWeite / segments;
+
+            var pathGeometry = new PathGeometry();
+            var figure       = new PathFigure {IsClosed = false};
+
+            var x0 = schanze.AbsprungPunkt.X;
+            var x  = 0;
+            var y  = flugbahn.Y(x);
+            figure.Segments.Add(new LineSegment {Point = new Point(x0 + x, y), IsStroked = false});
+
+            for (int i = 1; i <= segments; i++) {
+
+                x = i * step;
+                y = flugbahn.Y(x);
+
+                figure.Segments.Add(new LineSegment {Point = new Point(x0 + x, y)});
+            }
+
+            pathGeometry.Figures.Add(figure);
+
+            return pathGeometry;
         }
 
     }
