@@ -62,24 +62,29 @@ namespace SchanzenBerechner {
 
         void Refesh() {
 
-            SchanzenPath.Data = CreateSchanzenGeometry(Schanze);
-            FlugbahnPath.Data = CreateFlugbahnGeometry(Flugbahn);
+            var scale = 100.0;
 
-            var size = CalculateDesiredCanvasSize();
+            var schanze  = Schanze?.WithScale(scale);
+            var flugbahn = Flugbahn?.WithScale(scale);
+
+            SchanzenPath.Data = CreateSchanzenGeometry(schanze);
+            FlugbahnPath.Data = CreateFlugbahnGeometry(flugbahn);
+
+            var size = CalculateDesiredCanvasSize(schanze, flugbahn);
             Canvas.Width  = size.Width;
             Canvas.Height = size.Height;
         }
 
-        Size CalculateDesiredCanvasSize() {
+        static Size CalculateDesiredCanvasSize(Schanze schanze, Flugbahn flugbahn) {
             var width  = .0;
             var height = .0;
-            if (Schanze != null) {
-                width  = Schanze.GetSchanzenEndPunkt().X;
-                height = Schanze.GetSchanzenAbsprungPunkt().Y;
+            if (schanze != null) {
+                width  = schanze.EndPunkt.X;
+                height = schanze.AbsprungPunkt.Y;
             }
 
-            if (Flugbahn != null) {
-                width += Flugbahn.SprungWeite;
+            if (flugbahn != null) {
+                width += flugbahn.SprungWeite;
                 //height=Math TODO..
             }
 
@@ -95,12 +100,12 @@ namespace SchanzenBerechner {
             var pathGeometry = new PathGeometry();
             var figure       = new PathFigure {IsClosed = true};
 
-            figure.Segments.Add(new LineSegment {Point = schanze.GetSchanzenStartPunkt()});
-            figure.Segments.Add(new LineSegment {Point = schanze.GetSchanzenEndPunkt()});
-            figure.Segments.Add(new LineSegment {Point = schanze.GetSchanzenAbsprungPunkt()});
+            figure.Segments.Add(new LineSegment {Point = schanze.SchanzenStartPunkt});
+            figure.Segments.Add(new LineSegment {Point = schanze.EndPunkt});
+            figure.Segments.Add(new LineSegment {Point = schanze.AbsprungPunkt});
             figure.Segments.Add(new ArcSegment {
-                Size  = schanze.GetSchanzenRadiusGröße(),
-                Point = schanze.GetSchanzenStartPunkt(),
+                Size  = schanze.RadiusGröße,
+                Point = schanze.SchanzenStartPunkt,
 
             });
 

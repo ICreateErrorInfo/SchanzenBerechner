@@ -2,34 +2,58 @@
 
     public class Flugbahn {
 
+        private readonly double _absprungHöhe;
+        private readonly double _sprungWeite;
+
         Flugbahn(double absprungHöhe,
                  double absprungWinkel,
                  double absprungGeschwindigkeit,
-                 double sprungWeite) {
+                 double sprungWeite, double scale) {
 
-            AbsprungHöhe            = absprungHöhe;
+            _absprungHöhe           = absprungHöhe;
             AbsprungWinkelRad       = absprungWinkel;
             AbsprungGeschwindigkeit = absprungGeschwindigkeit;
-            SprungWeite             = sprungWeite;
+            _sprungWeite            = sprungWeite;
+            Scale                   = scale;
 
         }
 
-        public double AbsprungHöhe            { get; }
-        public double AbsprungWinkelRad       { get; }
+        public double AbsprungHöhe => _absprungHöhe * Scale;
+        public double SprungWeite  => _sprungWeite  * Scale;
+
         public double AbsprungGeschwindigkeit { get; }
+        public double AbsprungWinkelRad       { get; }
         public double AbsprungWinkelDeg       => Berechne.ToDeg(AbsprungWinkelRad);
-        public double SprungWeite             { get; }
+
+        public double Scale { get; }
 
         public double Y(double x) {
             return Berechne.Y(x, AbsprungGeschwindigkeit, AbsprungWinkelRad, AbsprungHöhe);
+        }
+
+        public Flugbahn WithScale(double scale) {
+            return new Flugbahn(
+                absprungHöhe: AbsprungHöhe,
+                absprungWinkel: AbsprungWinkelRad,
+                absprungGeschwindigkeit: AbsprungGeschwindigkeit,
+                sprungWeite: SprungWeite,
+                scale: scale);
         }
 
         public static Flugbahn Create(
             Schanze schanze,
             double absprungGeschwindigkeit) {
 
-            var weite = Berechne.Weite(absprungGeschwindigkeit, schanze.AbsprungwinkelRad);
-            return new Flugbahn(schanze.Höhe, schanze.AbsprungwinkelRad, absprungGeschwindigkeit, weite);
+            var weite = Berechne.Weite(
+                v0: absprungGeschwindigkeit,
+                alpha: schanze.AbsprungwinkelRad);
+
+            return new Flugbahn(
+                absprungHöhe: schanze.Höhe,
+                absprungWinkel: schanze.AbsprungwinkelRad,
+                absprungGeschwindigkeit: absprungGeschwindigkeit,
+                sprungWeite: weite,
+                scale: .0);
         }
 
     }
