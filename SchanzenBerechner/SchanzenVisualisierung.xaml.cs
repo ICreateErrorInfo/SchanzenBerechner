@@ -75,10 +75,13 @@ namespace SchanzenBerechner {
 
             SchanzenPath.Data = CreateSchanzenGeometry(schanze);
             FlugbahnPath.Data = CreateFlugbahnGeometry(schanze, flugbahn);
+            Boden.Visibility  = BodenAnzeigen() ? Visibility.Visible : Visibility.Collapsed;
 
             var size = CalculateDesiredCanvasSize(schanze, flugbahn);
             Canvas.Width  = size.Width;
             Canvas.Height = size.Height;
+
+            bool BodenAnzeigen() => schanze != null || flugbahn != null;
         }
 
         static Size CalculateDesiredCanvasSize(Schanze schanze, Flugbahn flugbahn) {

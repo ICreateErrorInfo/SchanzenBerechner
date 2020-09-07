@@ -7,15 +7,41 @@
              mc:Ignorable="d"
              Background="GhostWhite"
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <DrawingBrush x:Key="HatchBrush" TileMode="Tile"
+                      Viewport="0,0,30,30" ViewportUnits="Absolute"
+                      Viewbox="0,0,30,30" ViewboxUnits="Absolute">
+            <DrawingBrush.Drawing>
+                <GeometryDrawing>
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="Black" Thickness="2"/>
+                    </GeometryDrawing.Pen>
+                    <GeometryDrawing.Geometry>
+                        <Geometry>M0,0 L30,30 M15,-15 L45,15 M-15,15 L15,45</Geometry>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </UserControl.Resources>
     <Grid>
         <Canvas Grid.Row="0" x:Name="Canvas"
                 UseLayoutRounding="true"
                 SnapsToDevicePixels = "true"
-                Margin="10">
+                Margin="10,10,10,20">
 
             <Canvas.LayoutTransform>
                 <ScaleTransform ScaleX="1" ScaleY="-1" />
             </Canvas.LayoutTransform>
+
+            <Canvas x:Name="Boden" Visibility="Collapsed">
+                <Rectangle Fill="{StaticResource HatchBrush}" Canvas.Left="0" Canvas.Top="-20"
+                           Width="{Binding ElementName=Canvas, Path=ActualWidth}" Height="20" />
+
+                <Line X1="0" Y1="0" X2="{Binding ElementName=Canvas, Path=ActualWidth}" Y2="0"
+                      Stroke="Black"
+                      StrokeThickness="2" />
+            </Canvas>
 
             <Path x:Name="SchanzenPath"
                   Stroke="Black"
@@ -26,6 +52,7 @@
                   Stroke="Black"
                   StrokeDashArray="4 4"
                   StrokeThickness="2" />
+        
         </Canvas>
     </Grid>
 
