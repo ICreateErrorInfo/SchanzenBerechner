@@ -32,7 +32,7 @@
         public double Scale { get; }
 
         public double Y(double x) {
-            return SchrägerWurf.Y(
+            return Wurfparabel.Y(
                 x: x / Scale,
                 v0: AbsprungGeschwindigkeit,
                 alpha: AbsprungWinkel.Rad,
@@ -53,16 +53,15 @@
             Schanze schanze,
             double absprungGeschwindigkeit) {
 
-            var weite = SchrägerWurf.Weite(
+            var weite = Wurfparabel.Weite(
                 v0: absprungGeschwindigkeit,
+                y0: schanze.Höhe,
                 alpha: schanze.Absprungwinkel.Rad);
 
-            var höhe = SchrägerWurf.Höhe(
+            var höhe = Wurfparabel.Höhe(
                 v0: absprungGeschwindigkeit,
+                y0: schanze.Höhe,
                 alpha: schanze.Absprungwinkel.Rad);
-
-            // TODO Bug in Höhenberechnung...
-            höhe += schanze.Höhe;
 
             return new Flugbahn(
                 absprungHöhe: schanze.Höhe,

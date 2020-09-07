@@ -35,7 +35,8 @@ namespace SchanzenBerechner
             double höhe = double.Parse(SprungHöheTextBox_Tab2.Text);
             double geschwindigkeit = double.Parse(AbsprungGeschwindigkeitTextBox_Tab2.Text)/3.6;
 
-            AbsprungWinkelText_Tab2.Content = SchrägerWurf.Winkel(v0: geschwindigkeit, ys: höhe);
+            var winkel = Winkel.FromRad(Wurfparabel.Winkel(v0: geschwindigkeit, ys: höhe));
+            AbsprungWinkelText_Tab2.Content = winkel.Deg;
         }
         private void OnBerechneClickTab3(object sender, RoutedEventArgs e)
         {
