@@ -25,10 +25,18 @@ namespace Berechnung {
             return s;
         }
 
-        public static double Winkel(double v0, double ys) {
+        /// <summary>
+        /// Berechnet den Abwurfwinkel an Hand der Geschwindigkeit, Anfangshöhe und Scheitelpunkt.
+        /// </summary>
+        /// <param name="v0">Die Anfangsgeschwindigkeit in m/s</param>
+        /// <param name="y0">Die Anfangshöhe in m</param>
+        /// <param name="ys">Der zu erreichende Scheitelpunkt in m</param>
+        /// <returns></returns>
+        public static double Winkel(double v0, double y0, double ys) 
+        {
+            var alpha = Math.Asin(Math.Sqrt(2 * (ys - y0) / C2(v0)));
 
-            var ergebnis = Math.Asin(Math.Sqrt(ys * 2 * Naturkonstante.G / (v0 * v0)));
-            return ergebnis;
+            return alpha;
         }
 
         public static double Flugzeit(double v0, double y0, double alpha) //V0 Geschwindigeit, alpha schanzenwinkel
