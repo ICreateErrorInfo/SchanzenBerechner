@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Berechnung\Berechnung.csproj" />
+    <ProjectReference Include="..\ICreateErrorInfo.Shapes\ICreateErrorInfo.Shapes.csproj" />
   </ItemGroup>
 
 </Project>

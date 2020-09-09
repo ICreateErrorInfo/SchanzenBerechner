@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchanzenBerechner", "SchanzenBerechner\SchanzenBerechner.csproj", "{1CCBF5D5-1809-43D9-9C0B-672E8637E20F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Berechnung", "Berechnung\Berechnung.csproj", "{3CD9725F-4447-435B-8FC5-3B06366BE50C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Berechnung", "Berechnung\Berechnung.csproj", "{3CD9725F-4447-435B-8FC5-3B06366BE50C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerechnungTests", "BerechnungTests\BerechnungTests.csproj", "{321CEEF6-2160-48BA-88D2-18E26316C57C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BerechnungTests", "BerechnungTests\BerechnungTests.csproj", "{321CEEF6-2160-48BA-88D2-18E26316C57C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICreateErrorInfo.Shapes", "ICreateErrorInfo.Shapes\ICreateErrorInfo.Shapes.csproj", "{1FF21830-63CE-499B-8C38-2C0D3FAB1955}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{321CEEF6-2160-48BA-88D2-18E26316C57C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{321CEEF6-2160-48BA-88D2-18E26316C57C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{321CEEF6-2160-48BA-88D2-18E26316C57C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FF21830-63CE-499B-8C38-2C0D3FAB1955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF21830-63CE-499B-8C38-2C0D3FAB1955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF21830-63CE-499B-8C38-2C0D3FAB1955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF21830-63CE-499B-8C38-2C0D3FAB1955}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,11 +7,16 @@ namespace Berechnung {
     /// </summary>
     public static class Wurfparabel {
 
-        public static double Höhe(double v0, double y0, double alpha) //V0 Geschwindigeit, alpha schanzenwinkel
+        public static double ScheitelpunktX(double v0, double y0, double alpha) 
         {
-            var h = 0.5 * C2(v0) * Math.Sin(alpha) * Math.Sin(alpha)+y0;
-            return h;
+            var x = C2(v0) / 2 * Math.Sin(2 * alpha);
+            return x;
+        }
 
+        public static double ScheitelpunktY(double v0, double y0, double alpha) //V0 Geschwindigeit, alpha schanzenwinkel
+        {
+            var y = 0.5 * C2(v0) * Math.Sin(alpha) * Math.Sin(alpha)+y0;
+            return y;
         }
 
         public static double Weite(double v0, double y0, double alpha) //V0 Geschwindigeit, alpha schanzenwinkel
@@ -52,6 +57,8 @@ namespace Berechnung {
             return y;
 
         }
+
+        
 
         static double C1(double y0, double v0) {
             return (2 * y0 * Naturkonstante.G) / (v0 * v0);

@@ -23,7 +23,7 @@ namespace SchanzenBerechner
             var schanze  = Schanze.Create(schanzenHöhe, winkel);
             var flugbahn = Flugbahn.Create(schanze, geschwindigkeit);
 
-            SprungHöheText_Tab1.Content       = $"{flugbahn.SprungHöhe:F2}m";
+            SprungHöheText_Tab1.Content       = $"{flugbahn.ScheitelpunktY:F2}m";
             SprungEntfernungText_Tab1.Content = $"{flugbahn.SprungWeite:F2}m";
 
             SchanzenVisualisierung.Schanze  = schanze;

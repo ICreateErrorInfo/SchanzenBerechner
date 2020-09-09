@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SchanzenBerechner"
              xmlns:model="clr-namespace:SchanzenBerechner.Model"
+             xmlns:shapes="clr-namespace:ICreateErrorInfo.Shapes;assembly=ICreateErrorInfo.Shapes"
              d:DataContext="{d:DesignInstance Type=model:SchanzenVisualisierungViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d"
              Background="GhostWhite">
@@ -41,8 +42,9 @@
                 <ScaleTransform ScaleX="1" ScaleY="-1" />
             </Canvas.LayoutTransform>
 
+            
             <!--Boden-->
-            <Canvas Visibility="{Binding BodenAnzeigen,Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Canvas Visibility="{Binding BodenAnzeigen, Converter={StaticResource BooleanToVisibilityConverter}}">
 
                 <Rectangle Fill="{StaticResource HatchBrush}"
                            Canvas.Left="0"
@@ -70,9 +72,8 @@
                 </Path.Data>
             </Path>
 
-            <!--Flugbahn-->
-            <Path Stroke="Black"
-                  StrokeDashArray="4 4"
+            <!--Flugbahn--> <!--StrokeDashArray="4 4"-->
+            <Path Stroke="Red"
                   StrokeThickness="2">
 
                 <Path.Data>
@@ -82,6 +83,29 @@
                             <PolyLineSegment Points="{Binding Flugbahn.Punkte}" />
                         </PathFigure>
                     </PathGeometry>
+                </Path.Data>
+            </Path>
+
+            <shapes:LineArrow
+                Visibility="{Binding BodenAnzeigen, Converter={StaticResource BooleanToVisibilityConverter}}"
+                IsArrowClosed="true"
+                ArrowAngle="30"
+                Fill="Black"
+                Stroke="Black"
+                StrokeThickness="2"
+                ArrowedEnds="Both"
+                X1="{Binding Flugbahn.Scheitelpunkt.X}"
+                Y1="0"
+                X2="{Binding Flugbahn.Scheitelpunkt.X}"
+                Y2="{Binding Flugbahn.Scheitelpunkt.Y}" />
+
+            <Path
+                Visibility="{Binding BodenAnzeigen, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Stroke="Black"
+                Fill="Black"
+                StrokeThickness="1">
+                <Path.Data>
+                    <EllipseGeometry Center="{Binding Flugbahn.Scheitelpunkt}" RadiusX="2" RadiusY="2" />
                 </Path.Data>
             </Path>
 

@@ -111,7 +111,7 @@ namespace SchanzenBerechner.Model {
 
             if (flugbahn != null) {
                 width  += flugbahn.SprungWeite;
-                height =  Math.Max(flugbahn.SprungHöhe, height);
+                height =  Math.Max(flugbahn.ScheitelpunktY, height);
             }
 
             return new Size(width, height);

@@ -41,10 +41,13 @@ namespace SchanzenBerechner.Model {
 
             Punkte = new PointCollection(punkte);
 
+            Scheitelpunkt = new Point(x0 + flugbahn.ScheitelpunktX, flugbahn.ScheitelpunktY);
         }
 
         public Point           StartPunkt { get; }
         public PointCollection Punkte     { get; }
+
+        public Point Scheitelpunkt { get; }
 
         public Point EndPunkt { get; }
 

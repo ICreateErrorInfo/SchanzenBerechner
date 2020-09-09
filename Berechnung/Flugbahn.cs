@@ -4,27 +4,31 @@
 
         private readonly double _absprungHöhe;
         private readonly double _sprungWeite;
-        private readonly double _sprungHöhe;
+        private readonly double _scheitelpunktX;
+        private readonly double _scheitelpunktY;
 
         Flugbahn(double absprungHöhe,
                  Winkel absprungWinkel,
                  double absprungGeschwindigkeit,
                  double sprungWeite,
-                 double sprungHöhe,
+                 double scheitelpunktX,
+                 double scheitelpunktY,
                  double scale) {
 
             _absprungHöhe           = absprungHöhe;
             AbsprungWinkel          = absprungWinkel;
             AbsprungGeschwindigkeit = absprungGeschwindigkeit;
             _sprungWeite            = sprungWeite;
-            _sprungHöhe             = sprungHöhe;
+            _scheitelpunktY         = scheitelpunktY;
+            _scheitelpunktX         = scheitelpunktX;
             Scale                   = scale;
 
         }
 
-        public double AbsprungHöhe => _absprungHöhe * Scale;
-        public double SprungWeite  => _sprungWeite  * Scale;
-        public double SprungHöhe   => _sprungHöhe   * Scale;
+        public double AbsprungHöhe   => _absprungHöhe   * Scale;
+        public double SprungWeite    => _sprungWeite    * Scale;
+        public double ScheitelpunktX => _scheitelpunktX * Scale;
+        public double ScheitelpunktY => _scheitelpunktY * Scale;
 
         public double AbsprungGeschwindigkeit { get; }
         public Winkel AbsprungWinkel          { get; }
@@ -41,11 +45,12 @@
 
         public Flugbahn WithScale(double scale) {
             return new Flugbahn(
-                absprungHöhe: AbsprungHöhe,
+                absprungHöhe: _absprungHöhe,
                 absprungWinkel: AbsprungWinkel,
                 absprungGeschwindigkeit: AbsprungGeschwindigkeit,
-                sprungWeite: SprungWeite,
-                sprungHöhe: SprungHöhe,
+                sprungWeite: _sprungWeite,
+                scheitelpunktX: _scheitelpunktX,
+                scheitelpunktY: _scheitelpunktY,
                 scale: scale);
         }
 
@@ -58,7 +63,13 @@
                 y0: schanze.Höhe,
                 alpha: schanze.Absprungwinkel.Rad);
 
-            var höhe = Wurfparabel.Höhe(
+            var scheitelpunktX = Wurfparabel.ScheitelpunktX(
+                v0: absprungGeschwindigkeit,
+                y0: schanze.Höhe,
+                alpha: schanze.Absprungwinkel.Rad
+            );
+
+            var höhe = Wurfparabel.ScheitelpunktY(
                 v0: absprungGeschwindigkeit,
                 y0: schanze.Höhe,
                 alpha: schanze.Absprungwinkel.Rad);
@@ -68,7 +79,8 @@
                 absprungWinkel: schanze.Absprungwinkel,
                 absprungGeschwindigkeit: absprungGeschwindigkeit,
                 sprungWeite: weite,
-                sprungHöhe: höhe,
+                scheitelpunktX: scheitelpunktX,
+                scheitelpunktY: höhe,
                 scale: 1);
         }
 
