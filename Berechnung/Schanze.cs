@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 
 namespace Berechnung {
 
@@ -22,21 +21,11 @@ namespace Berechnung {
 
         }
 
-        public double Länge  => _länge  * Scale;
-        public double Höhe   => _höhe   * Scale;
-        public double Radius => _radius * Scale;
-
+        public double Länge          => _länge  * Scale;
+        public double Höhe           => _höhe   * Scale;
+        public double Radius         => _radius * Scale;
         public Winkel Absprungwinkel { get; }
-
-        public double Scale { get; }
-
-        public Point SchanzenStartPunkt => new Point(0, 0);
-
-        public Point AbsprungPunkt => new Point(Länge, Höhe);
-
-        public Point EndPunkt => new Point(Länge, 0);
-
-        public Size RadiusGröße => new Size(Radius, Radius);
+        public double Scale          { get; }
 
         public Schanze WithScale(double scale) {
             return new Schanze(

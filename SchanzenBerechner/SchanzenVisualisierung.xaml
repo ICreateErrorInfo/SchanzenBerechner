@@ -4,18 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SchanzenBerechner"
+             xmlns:model="clr-namespace:SchanzenBerechner.Model"
+             d:DataContext="{d:DesignInstance Type=model:SchanzenVisualisierungViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d"
              Background="GhostWhite"
-             d:DesignHeight="450" d:DesignWidth="800">
+             >
 
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
         <DrawingBrush x:Key="HatchBrush" TileMode="Tile"
                       Viewport="0,0,30,30" ViewportUnits="Absolute"
                       Viewbox="0,0,30,30" ViewboxUnits="Absolute">
             <DrawingBrush.Drawing>
                 <GeometryDrawing>
                     <GeometryDrawing.Pen>
-                        <Pen Brush="Black" Thickness="2"/>
+                        <Pen Brush="Black" Thickness="2" />
                     </GeometryDrawing.Pen>
                     <GeometryDrawing.Geometry>
                         <Geometry>M0,0 L30,30 M15,-15 L45,15 M-15,15 L15,45</Geometry>
@@ -24,18 +28,26 @@
             </DrawingBrush.Drawing>
         </DrawingBrush>
     </UserControl.Resources>
+
     <Grid>
-        <Canvas Grid.Row="0" x:Name="Canvas"
+        <Canvas x:Name="Canvas"
+                Grid.Row="0"
                 UseLayoutRounding="true"
-                SnapsToDevicePixels = "true"
+                SnapsToDevicePixels="true"
+                Width="{Binding CanvasWidth}"
+                Height="{Binding CanvasHeight}"
                 Margin="10,10,10,20">
 
             <Canvas.LayoutTransform>
                 <ScaleTransform ScaleX="1" ScaleY="-1" />
             </Canvas.LayoutTransform>
 
-            <Canvas x:Name="Boden" Visibility="Collapsed">
-                <Rectangle Fill="{StaticResource HatchBrush}" Canvas.Left="0" Canvas.Top="-20"
+            <!--Boden-->
+            <Canvas Visibility="{Binding BodenAnzeigen,Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                <Rectangle Fill="{StaticResource HatchBrush}"
+                           Canvas.Left="0"
+                           Canvas.Top="-20"
                            Width="{Binding ElementName=Canvas, Path=ActualWidth}" Height="20" />
 
                 <Line X1="0" Y1="0" X2="{Binding ElementName=Canvas, Path=ActualWidth}" Y2="0"
@@ -43,16 +55,37 @@
                       StrokeThickness="2" />
             </Canvas>
 
-            <Path x:Name="SchanzenPath"
-                  Stroke="Black"
+            <!-- Schanze-->
+            <Path Stroke="Black"
                   StrokeThickness="2"
-                  Fill="Orange" />
+                  Fill="Orange">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathFigure>
+                            <LineSegment Point="{Binding Schanze.StartPunkt}" IsStroked="false" />
+                            <LineSegment Point="{Binding Schanze.EndPunkt}" />
+                            <LineSegment Point="{Binding Schanze.AbsprungPunkt}" />
+                            <ArcSegment Point="{Binding Schanze.StartPunkt}" Size="{Binding Schanze.RadiusGröße}" />
+                        </PathFigure>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
 
-            <Path x:Name="FlugbahnPath"
-                  Stroke="Black"
+            <!--Flugbahn-->
+            <Path Stroke="Black"
                   StrokeDashArray="4 4"
-                  StrokeThickness="2" />
-        
+                  StrokeThickness="2">
+
+                <Path.Data>
+                    <PathGeometry>
+                        <PathFigure>
+                            <LineSegment Point="{Binding Flugbahn.StartPunkt}" IsStroked="False" />
+                            <PolyLineSegment Points="{Binding Flugbahn.Punkte}" />
+                        </PathFigure>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+
         </Canvas>
     </Grid>
 
