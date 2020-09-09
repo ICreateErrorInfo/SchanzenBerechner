@@ -7,8 +7,7 @@
              xmlns:model="clr-namespace:SchanzenBerechner.Model"
              d:DataContext="{d:DesignInstance Type=model:SchanzenVisualisierungViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d"
-             Background="GhostWhite"
-             >
+             Background="GhostWhite">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -36,7 +35,7 @@
                 SnapsToDevicePixels="true"
                 Width="{Binding CanvasWidth}"
                 Height="{Binding CanvasHeight}"
-                Margin="10,10,10,20">
+                Margin="10,10,10,30">
 
             <Canvas.LayoutTransform>
                 <ScaleTransform ScaleX="1" ScaleY="-1" />
@@ -48,9 +47,9 @@
                 <Rectangle Fill="{StaticResource HatchBrush}"
                            Canvas.Left="0"
                            Canvas.Top="-20"
-                           Width="{Binding ElementName=Canvas, Path=ActualWidth}" Height="20" />
+                           Width="{Binding CanvasWidth}" Height="20" />
 
-                <Line X1="0" Y1="0" X2="{Binding ElementName=Canvas, Path=ActualWidth}" Y2="0"
+                <Line X1="0" Y1="0" X2="{Binding CanvasWidth}" Y2="0"
                       Stroke="Black"
                       StrokeThickness="2" />
             </Canvas>

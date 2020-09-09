@@ -19,7 +19,7 @@ namespace SchanzenBerechner {
             DataContext = _viewModel;
         }
 
-        public Schanze Schanze {
+       public Schanze Schanze {
             get => (Schanze) GetValue(SchanzenBerechnungProperty);
             set => SetValue(SchanzenBerechnungProperty, value);
         }
