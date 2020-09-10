@@ -27,6 +27,9 @@
                 </GeometryDrawing>
             </DrawingBrush.Drawing>
         </DrawingBrush>
+        <SolidColorBrush x:Key="WinkelBrush" Color="#E7F0E7" />
+        <SolidColorBrush x:Key="WinkelLineBrush" Color="#036403" />
+        <SolidColorBrush x:Key="SchanzenBrush" Color="#FF9B31" />
     </UserControl.Resources>
 
     <Grid>
@@ -42,9 +45,9 @@
                 <ScaleTransform ScaleX="1" ScaleY="-1" />
             </Canvas.LayoutTransform>
 
-            
+
             <!--Boden-->
-            <Canvas Visibility="{Binding BodenAnzeigen, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Canvas Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}">
 
                 <Rectangle Fill="{StaticResource HatchBrush}"
                            Canvas.Left="0"
@@ -59,7 +62,7 @@
             <!-- Schanze-->
             <Path Stroke="Black"
                   StrokeThickness="2"
-                  Fill="Orange">
+                  Fill="{StaticResource SchanzenBrush}">
                 <Path.Data>
                     <PathGeometry>
                         <PathFigure>
@@ -73,7 +76,7 @@
             </Path>
 
             <!--Flugbahn--> <!--StrokeDashArray="4 4"-->
-            <Path Stroke="Red"
+            <Path Stroke="Black"
                   StrokeThickness="2">
 
                 <Path.Data>
@@ -86,29 +89,78 @@
                 </Path.Data>
             </Path>
 
-            <shapes:LineArrow
-                Visibility="{Binding BodenAnzeigen, Converter={StaticResource BooleanToVisibilityConverter}}"
-                IsArrowClosed="true"
-                ArrowAngle="30"
-                Fill="Black"
-                Stroke="Black"
-                StrokeThickness="2"
-                ArrowedEnds="Both"
-                X1="{Binding Flugbahn.Scheitelpunkt.X}"
-                Y1="0"
-                X2="{Binding Flugbahn.Scheitelpunkt.X}"
-                Y2="{Binding Flugbahn.Scheitelpunkt.Y}" />
+            <!--Metriken-->
+            <Canvas Visibility="{Binding RenderMetrics, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <shapes:LineArrow
+                    Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    IsArrowClosed="true"
+                    ArrowAngle="30"
+                    Fill="Red"
+                    Stroke="Red"
+                    StrokeThickness="2"
+                    ArrowedEnds="Both"
+                    X1="{Binding Flugbahn.Scheitelpunkt.X}"
+                    Y1="0"
+                    X2="{Binding Flugbahn.Scheitelpunkt.X}"
+                    Y2="{Binding Flugbahn.Scheitelpunkt.Y}" />
 
-            <Path
-                Visibility="{Binding BodenAnzeigen, Converter={StaticResource BooleanToVisibilityConverter}}"
-                Stroke="Black"
-                Fill="Black"
-                StrokeThickness="1">
-                <Path.Data>
-                    <EllipseGeometry Center="{Binding Flugbahn.Scheitelpunkt}" RadiusX="2" RadiusY="2" />
-                </Path.Data>
-            </Path>
+                <Path
+                    Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Stroke="Black"
+                    Fill="Black"
+                    StrokeThickness="1">
+                    <Path.Data>
+                        <EllipseGeometry Center="{Binding Flugbahn.Scheitelpunkt}" RadiusX="2" RadiusY="2" />
+                    </Path.Data>
+                </Path>
 
+                <shapes:LineArrow
+                    Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    IsArrowClosed="true"
+                    ArrowAngle="30"
+                    Fill="Red"
+                    Stroke="Red"
+                    StrokeThickness="2"
+                    ArrowedEnds="Both"
+                    X1="{Binding Flugbahn.StartPunkt.X}"
+                    Y1="0"
+                    X2="{Binding Flugbahn.EndPunkt.X}"
+                    Y2="0" />
+
+                <Line
+                    Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Stroke="Blue" StrokeThickness="1"
+                    X1="{Binding Flugbahn.StartPunkt.X}"
+                    Y1="{Binding Flugbahn.StartPunkt.Y}"
+                    X2="{Binding Flugbahn.AbsprungTangentenKontrollpunkt2.X}"
+                    Y2="{Binding Flugbahn.AbsprungTangentenKontrollpunkt2.Y}" />
+
+                <Line
+                    Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}"
+
+                    Stroke="Blue" StrokeThickness="1"
+                    X1="{Binding Flugbahn.StartPunkt.X}"
+                    Y1="{Binding Flugbahn.StartPunkt.Y}"
+                    X2="{Binding Flugbahn.AbsprungTangentenKontrollpunkt1.X}"
+                    Y2="{Binding Flugbahn.AbsprungTangentenKontrollpunkt1.Y}" />
+
+                <Path
+                    Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Stroke="{StaticResource WinkelLineBrush}" StrokeThickness="1" Fill="{StaticResource WinkelBrush}">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure
+                                IsClosed="True"
+                                StartPoint="{Binding Flugbahn.StartPunkt}">
+                                <LineSegment Point="{Binding Flugbahn.AbsprungWinkelPunkt2}" />
+                                <ArcSegment IsLargeArc="false" Point="{Binding Flugbahn.AbsprungWinkelPunkt1}"
+                                            Size="{Binding Flugbahn.AbsprungWinkelSize}" />
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+
+            </Canvas>
         </Canvas>
     </Grid>
 

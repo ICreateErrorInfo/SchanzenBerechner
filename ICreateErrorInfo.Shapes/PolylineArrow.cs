@@ -15,7 +15,7 @@ namespace ICreateErrorInfo.Shapes {
                                         ownerType: typeof(PolylineArrow),
                                         typeMetadata: new FrameworkPropertyMetadata(
                                             defaultValue: new PointCollection(),
-                                            flags: FrameworkPropertyMetadataOptions.AffectsMeasure));
+                                            flags: FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender));
 
         public PointCollection Points {
             set => SetValue(PointsProperty, value);

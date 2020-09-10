@@ -20,6 +20,8 @@ namespace SchanzenBerechner.Model {
                 var flugbahn = Berechnung.Flugbahn.Create(schanze, geschwindigkeit);
 
                 Invalidate(schanze, flugbahn);
+
+                RenderMetrics = true;
             }
         }
 
@@ -63,12 +65,22 @@ namespace SchanzenBerechner.Model {
             }
         }
 
-        bool _bodenAnzeigen;
+        bool _renderScene;
 
-        public bool BodenAnzeigen {
-            get { return _bodenAnzeigen; }
+        public bool RenderScene {
+            get { return _renderScene; }
             private set {
-                _bodenAnzeigen = value;
+                _renderScene = value;
+                OnPropertyChanged();
+            }
+        }
+
+        bool _renderMetrics;
+
+        public bool RenderMetrics {
+            get => _renderMetrics;
+            set {
+                _renderMetrics = value;
                 OnPropertyChanged();
             }
         }
@@ -90,7 +102,7 @@ namespace SchanzenBerechner.Model {
 
             Schanze       = schanze  != null ? new SchanzenViewModel(schanze) : null;
             Flugbahn      = flugbahn != null ? new FlugbahnViewModel(schanze, flugbahn) : null;
-            BodenAnzeigen = schanze  != null || flugbahn != null;
+            RenderScene = schanze  != null || flugbahn != null;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

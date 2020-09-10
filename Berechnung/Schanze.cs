@@ -29,10 +29,10 @@ namespace Berechnung {
 
         public Schanze WithScale(double scale) {
             return new Schanze(
-                länge: Länge,
-                höhe: Höhe,
+                länge: _länge,
+                höhe: _höhe,
                 absprungwinkel: Absprungwinkel,
-                radius: Radius,
+                radius: _radius,
                 scale: scale);
         }
 

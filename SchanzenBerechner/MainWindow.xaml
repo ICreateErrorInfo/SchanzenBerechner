@@ -39,10 +39,10 @@
                             <ColumnDefinition Width="30*" MinWidth="10" MaxWidth="30" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Name="AbsprungWinkelTextBox_Tab1" Text="0" Grid.Row="1" Grid.Column="2" FontSize="22"
+                        <TextBox Name="AbsprungWinkelTextBox_Tab1" Text="22" Grid.Row="1" Grid.Column="2" FontSize="22"
                                  HorizontalAlignment="Stretch" VerticalContentAlignment="Center" />
                         
-                        <TextBox Name="AbsprungGeschwindigkeitTextBox_Tab1" Text="0" Grid.Row="3" Grid.Column="2"
+                        <TextBox Name="AbsprungGeschwindigkeitTextBox_Tab1" Text="30" Grid.Row="3" Grid.Column="2"
                                  FontSize="22" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" />
                         
 

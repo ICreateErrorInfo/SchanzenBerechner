@@ -3,6 +3,7 @@ using System.Windows.Media;
 
 namespace ICreateErrorInfo.Shapes {
 
+
     public class LineArrow: Arrow {
 
         public static readonly DependencyProperty X1Property =
@@ -11,11 +12,11 @@ namespace ICreateErrorInfo.Shapes {
                                         ownerType: typeof(LineArrow),
                                         typeMetadata: new FrameworkPropertyMetadata(
                                             defaultValue: 0.0,
-                                            flags: FrameworkPropertyMetadataOptions.AffectsMeasure));
+                                            flags: FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender));
 
         public double X1 {
-            set { SetValue(X1Property, value); }
-            get { return (double) GetValue(X1Property); }
+            set => SetValue(X1Property, value);
+            get => (double) GetValue(X1Property);
         }
 
         public static readonly DependencyProperty Y1Property =
@@ -24,11 +25,11 @@ namespace ICreateErrorInfo.Shapes {
                                         ownerType: typeof(LineArrow),
                                         typeMetadata: new FrameworkPropertyMetadata(
                                             defaultValue: 0.0,
-                                            flags: FrameworkPropertyMetadataOptions.AffectsMeasure));
+                                            flags: FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender));
 
         public double Y1 {
-            set { SetValue(Y1Property, value); }
-            get { return (double) GetValue(Y1Property); }
+            set => SetValue(Y1Property, value);
+            get => (double) GetValue(Y1Property);
         }
 
         public static readonly DependencyProperty X2Property =
@@ -37,11 +38,11 @@ namespace ICreateErrorInfo.Shapes {
                                         ownerType: typeof(LineArrow),
                                         typeMetadata: new FrameworkPropertyMetadata(
                                             defaultValue: 0.0,
-                                            flags: FrameworkPropertyMetadataOptions.AffectsMeasure));
+                                            flags: FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender));
 
         public double X2 {
-            set { SetValue(X2Property, value); }
-            get { return (double) GetValue(X2Property); }
+            set => SetValue(X2Property, value);
+            get => (double) GetValue(X2Property);
         }
 
         public static readonly DependencyProperty Y2Property =
@@ -50,11 +51,11 @@ namespace ICreateErrorInfo.Shapes {
                                         ownerType: typeof(LineArrow),
                                         typeMetadata: new FrameworkPropertyMetadata(
                                             defaultValue: 0.0,
-                                            flags: FrameworkPropertyMetadataOptions.AffectsMeasure));
+                                            flags: FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender));
 
         public double Y2 {
-            set { SetValue(Y2Property, value); }
-            get { return (double) GetValue(Y2Property); }
+            set => SetValue(Y2Property, value);
+            get => (double) GetValue(Y2Property);
         }
 
         protected override PathFigure DefinePathFigure(out PolyLineSegment lineSegment) {

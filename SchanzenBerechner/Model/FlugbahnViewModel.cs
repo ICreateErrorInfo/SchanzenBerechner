@@ -42,12 +42,33 @@ namespace SchanzenBerechner.Model {
             Punkte = new PointCollection(punkte);
 
             Scheitelpunkt = new Point(x0 + flugbahn.ScheitelpunktX, flugbahn.ScheitelpunktY);
+
+            Matrix m = Matrix.Identity;
+            m.Rotate(flugbahn.AbsprungWinkel.Deg);
+
+            Vector v = new Vector(flugbahn.Scale, 0);
+            
+
+            AbsprungTangentenKontrollpunkt1 = StartPunkt + v;
+            AbsprungTangentenKontrollpunkt2 = StartPunkt + v * m;
+
+            var winkelSize = flugbahn.Scale * 0.2;
+            v = new Vector(winkelSize, 0);
+
+            AbsprungWinkelPunkt1 = StartPunkt + v;
+            AbsprungWinkelPunkt2 = StartPunkt + v * m;
+            AbsprungWinkelSize   = new Size(winkelSize, winkelSize);
         }
 
         public Point           StartPunkt { get; }
         public PointCollection Punkte     { get; }
 
-        public Point Scheitelpunkt { get; }
+        public Point Scheitelpunkt                  { get; }
+        public Point AbsprungTangentenKontrollpunkt1 { get; }
+        public Point AbsprungTangentenKontrollpunkt2 { get; }
+        public Point AbsprungWinkelPunkt1           { get; }
+        public Point AbsprungWinkelPunkt2           { get; }
+        public Size AbsprungWinkelSize           { get; }
 
         public Point EndPunkt { get; }
 
