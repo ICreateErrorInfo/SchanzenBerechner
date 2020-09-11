@@ -4,38 +4,64 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchanzenBerechner"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         ResizeMode="CanResizeWithGrip"
         mc:Ignorable="d"
         d:Height="800" d:Width="1024"
         Title="Schanzen Rechner">
+  
+    <Window.Resources>
+        <GridLength x:Key="Zeilenabstand">4.0</GridLength>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="OutputStyle" TargetType="TextBox"  >
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
     <Grid Margin="10">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TabControl Grid.Row="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <TextBox Margin="5,22,0,0"
+                 x:Name="OutputTab1"
+                 Grid.Row="0" Grid.Column="1"
+                 Style="{StaticResource OutputStyle}"
+                  />
+
+        <TabControl Grid.Column="0" Grid.Row="0">
+           
             <TabItem Header="Entfernung u. Höhe">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30*" MinHeight="10" MaxHeight="30" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="10" />
+                        <RowDefinition Height="{StaticResource Zeilenabstand}" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="10" />
+                        <RowDefinition Height="{StaticResource Zeilenabstand}" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="10" />
+                        <RowDefinition Height="{StaticResource Zeilenabstand}" />
 
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30*" MinWidth="10" MaxWidth="30" />
-                        <ColumnDefinition Width="269*" MinWidth="269" />
-                        <ColumnDefinition Width="330*" MinWidth="200" />
-                        <ColumnDefinition Width="37" />
-                        <ColumnDefinition Width="213*" MinWidth="200" />
-                        <ColumnDefinition Width="330*" MinWidth="200" />
-                        <ColumnDefinition Width="30*" MinWidth="10" MaxWidth="30" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="50"  />
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="Auto"  />
                     </Grid.ColumnDefinitions>
 
                     <Label Content="Absprung Winkel in Grad" Grid.Row="1" Grid.Column="1" />
@@ -47,15 +73,10 @@
                     <Label Content="Absprung Höhe in cm" Grid.Row="5" Grid.Column="1" />
                     <TextBox Name="AbsprungHöheTextBox_Tab1" Text="20" Grid.Row="5" Grid.Column="2" />
 
-
-                    <Label Content="Sprung Entfernung" Grid.Row="1" Grid.Column="4" />
-                    <Label Name="SprungEntfernungText_Tab1" Content="0" Grid.Row="1" Grid.Column="5" />
-
-                    <Label Content="Sprung Höhe" Grid.Row="3" Grid.Column="4" />
-                    <Label Name="SprungHöheText_Tab1" Content="0" Grid.Row="3" Grid.Column="5" />
-
-                    <Button Content="Berechnen"
-                            Grid.Column="5"
+                   
+                   
+                    <Button Content="Berechnen" IsDefault="True" 
+                            Grid.Column="4"
                             Grid.Row="5"
                             Click="OnBerechnenClickTab1" />
 
@@ -67,11 +88,11 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30*" MinHeight="10" MaxHeight="30" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="10" />
+                        <RowDefinition Height="{StaticResource Zeilenabstand}" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="10" />
+                        <RowDefinition Height="{StaticResource Zeilenabstand}" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="10" />
+                        <RowDefinition Height="{StaticResource Zeilenabstand}" />
 
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -110,11 +131,11 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30*" MinHeight="10" MaxHeight="30" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="10" />
+                        <RowDefinition Height="{StaticResource Zeilenabstand}" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="10" />
+                        <RowDefinition Height="{StaticResource Zeilenabstand}" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="10" />
+                        <RowDefinition Height="{StaticResource Zeilenabstand}" />
 
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -127,7 +148,7 @@
                         <ColumnDefinition Width="30*" MinWidth="10" MaxWidth="30" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBox Name="AbsprungWinkelTextBox_Tab3" Text="0" Grid.Row="1" Grid.Column="2"  />
+                    <TextBox Name="AbsprungWinkelTextBox_Tab3" Text="0" Grid.Row="1" Grid.Column="2" />
 
                     <TextBox Name="SprungEntfernungTextBox_Tab3" Text="0" Grid.Row="1" Grid.Column="5" />
 
@@ -141,22 +162,22 @@
                     <Label Content="Absprung Geschwindigkeit" Grid.Row="3" Grid.Column="1" />
                     <Label Content="Sprung Höhe" Grid.Row="3" Grid.Column="4" />
 
-                    <Label Content="Sprung Entfernung" Grid.Row="1" Grid.Column="4"  />
+                    <Label Content="Sprung Entfernung" Grid.Row="1" Grid.Column="4" />
 
-                    <Button Content="Berechnen" Grid.Column="5" Grid.Row="5" 
+                    <Button Content="Berechnen" Grid.Column="5" Grid.Row="5"
                             Click="OnBerechneClickTab3" />
                 </Grid>
 
             </TabItem>
         </TabControl>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="500*" MinHeight="200" />
                 <RowDefinition Height="30*" MinHeight="10" MaxHeight="30" />
             </Grid.RowDefinitions>
 
-            <Viewbox Grid.Row="0" Stretch="Uniform">
+            <Viewbox Grid.Row="0"  Stretch="Uniform">
                 <local:SchanzenVisualisierung x:Name="SchanzenVisualisierung" />
 
             </Viewbox>

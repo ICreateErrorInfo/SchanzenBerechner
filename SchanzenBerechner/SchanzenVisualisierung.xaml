@@ -7,8 +7,7 @@
              xmlns:model="clr-namespace:SchanzenBerechner.Model"
              xmlns:shapes="clr-namespace:ICreateErrorInfo.Shapes;assembly=ICreateErrorInfo.Shapes"
              d:DataContext="{d:DesignInstance Type=model:SchanzenVisualisierungViewModel, IsDesignTimeCreatable=True}"
-             mc:Ignorable="d"
-             Background="GhostWhite">
+             mc:Ignorable="d">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
