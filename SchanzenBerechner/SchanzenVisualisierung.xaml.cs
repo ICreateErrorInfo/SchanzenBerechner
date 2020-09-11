@@ -31,6 +31,8 @@ namespace SchanzenBerechner {
             }
         }
 
+        internal SchanzenVisualisierungViewModel ViewModel => _viewModel;
+
         public Schanze Schanze {
             get => (Schanze) GetValue(SchanzenBerechnungProperty);
             set => SetValue(SchanzenBerechnungProperty, value);

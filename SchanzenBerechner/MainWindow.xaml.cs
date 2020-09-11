@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Windows;
 
 using Berechnung;
@@ -27,34 +26,14 @@ namespace SchanzenBerechner {
 
                 SchanzenVisualisierung.Schanze  = schanze;
                 SchanzenVisualisierung.Flugbahn = flugbahn;
-                OutputTab1.Text                 = GetOutputText(schanze, flugbahn);
+                OutputTab1.Text                 = SchanzenVisualisierung.ViewModel.DisplayString;
             } catch (Exception ex) {
                 OutputTab1.Text                 = ex.Message;
                 SchanzenVisualisierung.Schanze  = null;
                 SchanzenVisualisierung.Flugbahn = null;
             }
         }
-
-        private string GetOutputText(Schanze schanze, Flugbahn flugbahn) {
-            var sb = new StringBuilder();
-            if (flugbahn != null) {
-                sb.AppendLine($"Absprunggeschwindigkeit: {flugbahn.AbsprungGeschwindigkeit.KmProH:F2}km/h");
-                sb.AppendLine($"Aufprallgeschwindigkeit: {flugbahn.AufprallGeschwindigkeit.KmProH:F2}km/h");
-                sb.AppendLine($"Absprungwinkel:          {flugbahn.AbsprungWinkel.Deg:F2}°");
-                sb.AppendLine($"Aufprallwinkel:          {flugbahn.AufprallWinkel.Deg:F2}°");
-                sb.AppendLine($"Sprunghöhe:              {flugbahn.ScheitelpunktY:F2}m");
-                sb.AppendLine($"Sprungweite:             {flugbahn.SprungWeite:F2}m");
-            }
-
-            if (schanze != null) {
-                sb.AppendLine($"Schanzenhöhe:            {schanze.Höhe:F2}m");
-                sb.AppendLine($"Schanzenlänge:           {schanze.Länge:F2}m");
-                sb.AppendLine($"Schanzenradius:          {schanze.Radius:F2}m");
-            }
-
-            return sb.ToString();
-        }
-
+        
         private void OnBerechneClickTab2(object sender, RoutedEventArgs e) {
             var höhe            = double.Parse(SprungHöheTextBox_Tab2.Text);
             var geschwindigkeit = Geschwindigkeit.FromKmProH(double.Parse(AbsprungGeschwindigkeitTextBox_Tab2.Text));

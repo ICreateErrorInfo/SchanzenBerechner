@@ -1,13 +1,23 @@
-﻿using System;
+﻿#region Using Directives
+
+using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Windows;
 
 using Berechnung;
 
+#endregion
+
 namespace SchanzenBerechner.Model {
 
+    [DebuggerDisplay("{" + nameof(DisplayString) + ",nq}")]
     class SchanzenVisualisierungViewModel: INotifyPropertyChanged {
+
+        Schanze  _orgSchanze;
+        Flugbahn _orgFlugbahn;
 
         public SchanzenVisualisierungViewModel() {
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject())) {
@@ -29,7 +39,7 @@ namespace SchanzenBerechner.Model {
         private SchanzenViewModel _schanzenViewModel;
 
         public SchanzenViewModel Schanze {
-            get { return _schanzenViewModel; }
+            get => _schanzenViewModel;
             private set {
                 _schanzenViewModel = value;
                 OnPropertyChanged();
@@ -39,7 +49,7 @@ namespace SchanzenBerechner.Model {
         private FlugbahnViewModel _flugbahnModel;
 
         public FlugbahnViewModel Flugbahn {
-            get { return _flugbahnModel; }
+            get => _flugbahnModel;
             private set {
                 _flugbahnModel = value;
                 OnPropertyChanged();
@@ -49,7 +59,7 @@ namespace SchanzenBerechner.Model {
         double _canvasWidth;
 
         public double CanvasWidth {
-            get { return _canvasWidth; }
+            get => _canvasWidth;
             private set {
                 _canvasWidth = value;
                 OnPropertyChanged();
@@ -59,7 +69,7 @@ namespace SchanzenBerechner.Model {
         double _canvaHeight;
 
         public double CanvasHeight {
-            get { return _canvaHeight; }
+            get => _canvaHeight;
             private set {
                 _canvaHeight = value;
                 OnPropertyChanged();
@@ -69,7 +79,7 @@ namespace SchanzenBerechner.Model {
         bool _renderScene;
 
         public bool RenderScene {
-            get { return _renderScene; }
+            get => _renderScene;
             private set {
                 _renderScene = value;
                 OnPropertyChanged();
@@ -86,7 +96,20 @@ namespace SchanzenBerechner.Model {
             }
         }
 
+        string _displayString;
+
+        public string DisplayString {
+            get => _displayString;
+            set {
+                _displayString = value;
+                OnPropertyChanged();
+            }
+        }
+
         public void Invalidate(Schanze schanze, Flugbahn flugbahn) {
+
+            _orgSchanze  = schanze;
+            _orgFlugbahn = flugbahn;
 
             var orgSize = CalculateDesiredCanvasSize(schanze, flugbahn);
             // Wir sagen es soll alles auf 1000 Pixel Platz haben...
@@ -101,9 +124,10 @@ namespace SchanzenBerechner.Model {
             CanvasWidth  = size.Width;
             CanvasHeight = size.Height;
 
-            Schanze     = schanze  != null ? new SchanzenViewModel(schanze) : null;
-            Flugbahn    = flugbahn != null ? new FlugbahnViewModel(schanze, flugbahn) : null;
-            RenderScene = schanze  != null || flugbahn != null;
+            Schanze       = schanze  != null ? new SchanzenViewModel(schanze) : null;
+            Flugbahn      = flugbahn != null ? new FlugbahnViewModel(schanze, flugbahn) : null;
+            RenderScene   = schanze  != null || flugbahn != null;
+            DisplayString = ToDisplayString();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -128,6 +152,26 @@ namespace SchanzenBerechner.Model {
             }
 
             return new Size(width, height);
+        }
+
+        public string ToDisplayString() {
+            var sb = new StringBuilder();
+            if (_orgFlugbahn != null) {
+                sb.AppendLine($"Absprunggeschwindigkeit: {_orgFlugbahn.AbsprungGeschwindigkeit.KmProH:F2}km/h");
+                sb.AppendLine($"Aufprallgeschwindigkeit: {_orgFlugbahn.AufprallGeschwindigkeit.KmProH:F2}km/h");
+                sb.AppendLine($"Absprungwinkel:          {_orgFlugbahn.AbsprungWinkel.Deg:F2}°");
+                sb.AppendLine($"Aufprallwinkel:          {_orgFlugbahn.AufprallWinkel.Deg:F2}°");
+                sb.AppendLine($"Sprunghöhe:              {_orgFlugbahn.ScheitelpunktY:F2}m");
+                sb.AppendLine($"Sprungweite:             {_orgFlugbahn.SprungWeite:F2}m");
+            }
+
+            if (_orgSchanze != null) {
+                sb.AppendLine($"Schanzenhöhe:            {_orgSchanze.Höhe:F2}m");
+                sb.AppendLine($"Schanzenlänge:           {_orgSchanze.Länge:F2}m");
+                sb.AppendLine($"Schanzenradius:          {_orgSchanze.Radius:F2}m");
+            }
+
+            return sb.ToString();
         }
 
     }
