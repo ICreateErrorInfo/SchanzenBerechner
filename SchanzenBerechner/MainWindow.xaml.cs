@@ -18,9 +18,9 @@ namespace SchanzenBerechner {
         private void OnBerechnenClickTab1(object sender, RoutedEventArgs e) {
             try {
 
-                Winkel winkel          = Winkel.FromDeg(double.Parse(AbsprungWinkelTextBox_Tab1.Text));
-                double geschwindigkeit = double.Parse(AbsprungGeschwindigkeitTextBox_Tab1.Text) / 3.6;
-                double schanzenHöhe    = double.Parse(AbsprungHöheTextBox_Tab1.Text)            * 0.01;
+                var winkel          = Winkel.FromDeg(double.Parse(AbsprungWinkelTextBox_Tab1.Text));
+                var geschwindigkeit = Geschwindigkeit.FromKmProH(double.Parse(AbsprungGeschwindigkeitTextBox_Tab1.Text));
+                var schanzenHöhe    = double.Parse(AbsprungHöheTextBox_Tab1.Text) * 0.01;
 
                 var schanze  = Schanze.Create(schanzenHöhe, winkel);
                 var flugbahn = Flugbahn.Create(schanze, geschwindigkeit);
@@ -38,8 +38,8 @@ namespace SchanzenBerechner {
         private string GetOutputText(Schanze schanze, Flugbahn flugbahn) {
             var sb = new StringBuilder();
             if (flugbahn != null) {
-                sb.AppendLine($"Absprunggeschwindigkeit: {flugbahn.AbsprungGeschwindigkeit * 3.6:F2}km/h");
-                sb.AppendLine($"Aufprallgeschwindigkeit: {flugbahn.AufprallGeschwindigkeit * 3.6:F2}km/h");
+                sb.AppendLine($"Absprunggeschwindigkeit: {flugbahn.AbsprungGeschwindigkeit.KmProH:F2}km/h");
+                sb.AppendLine($"Aufprallgeschwindigkeit: {flugbahn.AufprallGeschwindigkeit.KmProH:F2}km/h");
                 sb.AppendLine($"Absprungwinkel:          {flugbahn.AbsprungWinkel.Deg:F2}°");
                 sb.AppendLine($"Aufprallwinkel:          {flugbahn.AufprallWinkel.Deg:F2}°");
                 sb.AppendLine($"Sprunghöhe:              {flugbahn.ScheitelpunktY:F2}m");
@@ -56,11 +56,11 @@ namespace SchanzenBerechner {
         }
 
         private void OnBerechneClickTab2(object sender, RoutedEventArgs e) {
-            double höhe            = double.Parse(SprungHöheTextBox_Tab2.Text);
-            double geschwindigkeit = double.Parse(AbsprungGeschwindigkeitTextBox_Tab2.Text) / 3.6;
-            double schanzenHöhe    = 0.16; // TODO Schanzenhöhe...
+            var höhe            = double.Parse(SprungHöheTextBox_Tab2.Text);
+            var geschwindigkeit = Geschwindigkeit.FromKmProH(double.Parse(AbsprungGeschwindigkeitTextBox_Tab2.Text));
+            var schanzenHöhe    = 0.16; // TODO Schanzenhöhe...
 
-            var winkel = Winkel.FromRad(Wurfparabel.Abwurfwinkel(v0: geschwindigkeit, y0: schanzenHöhe, ys: höhe));
+            var winkel = Winkel.FromRad(Wurfparabel.Abwurfwinkel(v0: geschwindigkeit.MProS, y0: schanzenHöhe, ys: höhe));
 
             var schanze  = Schanze.Create(schanzenHöhe, winkel);
             var flugbahn = Flugbahn.Create(schanze, geschwindigkeit);

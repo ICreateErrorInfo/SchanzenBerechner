@@ -9,12 +9,12 @@
 
         Flugbahn(double absprungHöhe,
                  Winkel absprungWinkel,
-                 double absprungGeschwindigkeit,
+                 Geschwindigkeit absprungGeschwindigkeit,
                  double sprungWeite,
                  double scheitelpunktX,
                  double scheitelpunktY,
                  Winkel aufprallWinkel,
-                 double aufprallGeschwindigkeit,
+                 Geschwindigkeit aufprallGeschwindigkeit,
                  double scale) {
 
             _absprungHöhe           = absprungHöhe;
@@ -34,17 +34,17 @@
         public double ScheitelpunktX => _scheitelpunktX * Scale;
         public double ScheitelpunktY => _scheitelpunktY * Scale;
 
-        public double AbsprungGeschwindigkeit { get; }
-        public Winkel AbsprungWinkel          { get; }
-        public Winkel AufprallWinkel          { get; }
-        public double AufprallGeschwindigkeit { get; }
+        public Geschwindigkeit AbsprungGeschwindigkeit { get; }
+        public Winkel          AbsprungWinkel          { get; }
+        public Winkel          AufprallWinkel          { get; }
+        public Geschwindigkeit AufprallGeschwindigkeit { get; }
 
         public double Scale { get; }
 
         public double Y(double x) {
             return Wurfparabel.Y(
                 x: x / Scale,
-                v0: AbsprungGeschwindigkeit,
+                v0: AbsprungGeschwindigkeit.MProS,
                 alpha: AbsprungWinkel.Rad,
                 y0: _absprungHöhe) * Scale;
         }
@@ -64,32 +64,32 @@
 
         public static Flugbahn Create(
             Schanze schanze,
-            double absprungGeschwindigkeit) {
+            Geschwindigkeit absprungGeschwindigkeit) {
 
             var weite = Wurfparabel.Weite(
-                v0: absprungGeschwindigkeit,
+                v0: absprungGeschwindigkeit.MProS,
                 y0: schanze.Höhe,
                 alpha: schanze.Absprungwinkel.Rad);
 
             var scheitelpunktX = Wurfparabel.ScheitelpunktX(
-                v0: absprungGeschwindigkeit,
+                v0: absprungGeschwindigkeit.MProS,
                 y0: schanze.Höhe,
                 alpha: schanze.Absprungwinkel.Rad
             );
 
             var höhe = Wurfparabel.ScheitelpunktY(
-                v0: absprungGeschwindigkeit,
+                v0: absprungGeschwindigkeit.MProS,
                 y0: schanze.Höhe,
                 alpha: schanze.Absprungwinkel.Rad);
 
             var aufprallWinkel = Wurfparabel.AufprallWinkel(
-                v0: absprungGeschwindigkeit,
+                v0: absprungGeschwindigkeit.MProS,
                 y0: schanze.Höhe,
                 alpha: schanze.Absprungwinkel.Rad
             );
 
             var aufprallGeschwindigkeit = Wurfparabel.AufprallGeschwindigkeit(
-                v0: absprungGeschwindigkeit,
+                v0: absprungGeschwindigkeit.MProS,
                 y0: schanze.Höhe,
                 alpha: schanze.Absprungwinkel.Rad
             );
@@ -102,7 +102,7 @@
                 scheitelpunktX: scheitelpunktX,
                 scheitelpunktY: höhe,
                 aufprallWinkel: Winkel.FromRad(aufprallWinkel),
-                aufprallGeschwindigkeit: aufprallGeschwindigkeit,
+                aufprallGeschwindigkeit: Geschwindigkeit.FromMProS(aufprallGeschwindigkeit),
                 scale: 1);
         }
 

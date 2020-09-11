@@ -12,8 +12,8 @@ namespace SchanzenBerechner.Model {
         public SchanzenVisualisierungViewModel() {
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject())) {
 
-                Winkel winkel          = Winkel.FromDeg(22);
-                double geschwindigkeit = 20 / 3.6;
+                var    winkel          = Winkel.FromDeg(22);
+                var    geschwindigkeit = Geschwindigkeit.FromKmProH(20);
                 double schanzenHöhe    = 0.16;
 
                 var schanze  = Berechnung.Schanze.Create(schanzenHöhe, winkel);
