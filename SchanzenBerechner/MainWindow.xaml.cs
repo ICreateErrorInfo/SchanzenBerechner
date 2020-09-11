@@ -18,7 +18,7 @@ namespace SchanzenBerechner
         {
             Winkel winkel          = Winkel.FromDeg(double.Parse(AbsprungWinkelTextBox_Tab1.Text));
             double geschwindigkeit = double.Parse(AbsprungGeschwindigkeitTextBox_Tab1.Text) / 3.6;
-            double schanzenHöhe    = 0.16; // TODO Schanzenhöhe...
+            double schanzenHöhe    = double.Parse(AbsprungHöheTextBox_Tab1.Text)*0.01 ; 
 
             var schanze  = Schanze.Create(schanzenHöhe, winkel);
             var flugbahn = Flugbahn.Create(schanze, geschwindigkeit);
