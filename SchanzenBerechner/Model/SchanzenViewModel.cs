@@ -19,7 +19,8 @@ namespace SchanzenBerechner.Model {
 
         public Point EndPunkt => new Point(_schanze.Länge, 0);
 
-        public Size RadiusGröße => new Size(_schanze.Radius, _schanze.Radius);
+        public Size  RadiusGröße         => new Size(_schanze.Radius, _schanze.Radius);
+        public Point SchanzenMittelpunkt => new Point(0, _schanze.Radius);
 
     }
 
