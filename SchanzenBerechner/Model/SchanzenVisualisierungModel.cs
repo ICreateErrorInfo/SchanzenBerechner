@@ -23,6 +23,7 @@ namespace SchanzenBerechner.Model {
 
                 RenderMetrics = true;
             }
+
         }
 
         private SchanzenViewModel _schanzenViewModel;
@@ -100,8 +101,8 @@ namespace SchanzenBerechner.Model {
             CanvasWidth  = size.Width;
             CanvasHeight = size.Height;
 
-            Schanze       = schanze  != null ? new SchanzenViewModel(schanze) : null;
-            Flugbahn      = flugbahn != null ? new FlugbahnViewModel(schanze, flugbahn) : null;
+            Schanze     = schanze  != null ? new SchanzenViewModel(schanze) : null;
+            Flugbahn    = flugbahn != null ? new FlugbahnViewModel(schanze, flugbahn) : null;
             RenderScene = schanze  != null || flugbahn != null;
         }
 

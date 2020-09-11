@@ -36,7 +36,7 @@ namespace SchanzenBerechner
             double geschwindigkeit = double.Parse(AbsprungGeschwindigkeitTextBox_Tab2.Text) /3.6;
             double schanzenHöhe    = 0.16; // TODO Schanzenhöhe...
 
-            var winkel = Winkel.FromRad(Wurfparabel.Winkel(v0: geschwindigkeit, y0: schanzenHöhe, ys: höhe));
+            var winkel = Winkel.FromRad(Wurfparabel.Abwurfwinkel(v0: geschwindigkeit, y0: schanzenHöhe, ys: höhe));
 
             var schanze  = Schanze.Create(schanzenHöhe, winkel);
             var flugbahn = Flugbahn.Create(schanze, geschwindigkeit);

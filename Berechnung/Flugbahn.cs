@@ -13,6 +13,8 @@
                  double sprungWeite,
                  double scheitelpunktX,
                  double scheitelpunktY,
+                 Winkel aufprallWinkel,
+                 double aufprallGeschwindigkeit,
                  double scale) {
 
             _absprungHöhe           = absprungHöhe;
@@ -22,6 +24,8 @@
             _scheitelpunktY         = scheitelpunktY;
             _scheitelpunktX         = scheitelpunktX;
             Scale                   = scale;
+            AufprallWinkel          = aufprallWinkel;
+            AufprallGeschwindigkeit = aufprallGeschwindigkeit;
 
         }
 
@@ -32,6 +36,8 @@
 
         public double AbsprungGeschwindigkeit { get; }
         public Winkel AbsprungWinkel          { get; }
+        public Winkel AufprallWinkel          { get; }
+        public double AufprallGeschwindigkeit { get; }
 
         public double Scale { get; }
 
@@ -51,6 +57,8 @@
                 sprungWeite: _sprungWeite,
                 scheitelpunktX: _scheitelpunktX,
                 scheitelpunktY: _scheitelpunktY,
+                aufprallWinkel: AufprallWinkel,
+                aufprallGeschwindigkeit: AufprallGeschwindigkeit,
                 scale: scale);
         }
 
@@ -74,6 +82,18 @@
                 y0: schanze.Höhe,
                 alpha: schanze.Absprungwinkel.Rad);
 
+            var aufprallWinkel = Wurfparabel.AufprallWinkel(
+                v0: absprungGeschwindigkeit,
+                y0: schanze.Höhe,
+                alpha: schanze.Absprungwinkel.Rad
+            );
+
+            var aufprallGeschwindigkeit = Wurfparabel.AufprallGeschwindigkeit(
+                v0: absprungGeschwindigkeit,
+                y0: schanze.Höhe,
+                alpha: schanze.Absprungwinkel.Rad
+            );
+
             return new Flugbahn(
                 absprungHöhe: schanze.Höhe,
                 absprungWinkel: schanze.Absprungwinkel,
@@ -81,6 +101,8 @@
                 sprungWeite: weite,
                 scheitelpunktX: scheitelpunktX,
                 scheitelpunktY: höhe,
+                aufprallWinkel: Winkel.FromRad(aufprallWinkel),
+                aufprallGeschwindigkeit: aufprallGeschwindigkeit,
                 scale: 1);
         }
 

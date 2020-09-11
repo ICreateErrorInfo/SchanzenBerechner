@@ -185,8 +185,10 @@
                     <RowDefinition Height="30*" MinHeight="10" MaxHeight="30" />
                 </Grid.RowDefinitions>
                
+                
                 <local:SchanzenVisualisierung Grid.Row="0" x:Name="SchanzenVisualisierung"/>
 
+                <CheckBox Grid.Row="0" IsChecked="{Binding ElementName=SchanzenVisualisierung, Path=RenderMetrics}">Metriken anzeigen</CheckBox>
             </Grid>
 
         </Grid>

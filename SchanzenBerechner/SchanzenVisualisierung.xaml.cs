@@ -2,6 +2,7 @@
 
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 using SchanzenBerechner.Model;
 
@@ -15,11 +16,22 @@ namespace SchanzenBerechner {
 
             InitializeComponent();
 
-            _viewModel      = new SchanzenVisualisierungViewModel();
+            _viewModel = new SchanzenVisualisierungViewModel();
+
+            BindToViewModel(RenderMetricsProperty, nameof(SchanzenVisualisierungViewModel.RenderMetrics));
+
             DataContext = _viewModel;
+
+            void BindToViewModel(DependencyProperty dependencyProperty, string viewModelPropertyName) {
+                SetBinding(
+                    dependencyProperty, 
+                    new Binding(viewModelPropertyName) {
+                        Source = _viewModel,
+                    });
+            }
         }
 
-       public Schanze Schanze {
+        public Schanze Schanze {
             get => (Schanze) GetValue(SchanzenBerechnungProperty);
             set => SetValue(SchanzenBerechnungProperty, value);
         }
@@ -65,6 +77,23 @@ namespace SchanzenBerechner {
             me.InvalidateModel();
 
         }
+
+        public bool RenderMetrics {
+            get => (bool) GetValue(RenderMetricsProperty);
+            set => SetValue(RenderMetricsProperty, value);
+        }
+
+        public static readonly DependencyProperty RenderMetricsProperty =
+            DependencyProperty.Register(
+                name: nameof(RenderMetrics),
+                propertyType: typeof(bool),
+                ownerType: typeof(SchanzenVisualisierung),
+                typeMetadata: new FrameworkPropertyMetadata(
+                    defaultValue: false,
+                    flags: FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender) {
+                    BindsTwoWayByDefault = true
+                }
+            );
 
         void InvalidateModel() {
             _viewModel.Invalidate(Schanze, Flugbahn);

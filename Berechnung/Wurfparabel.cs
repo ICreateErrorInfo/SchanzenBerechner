@@ -31,17 +31,47 @@ namespace Berechnung {
         }
 
         /// <summary>
-        /// Berechnet den Abwurfwinkel an Hand der Geschwindigkeit, Anfangshöhe und Scheitelpunkt.
+        /// Berechnet den Abwurfwinkel im Bogemaß (RAD) an Hand der Geschwindigkeit, Anfangshöhe und Scheitelpunkt.
         /// </summary>
         /// <param name="v0">Die Anfangsgeschwindigkeit in m/s</param>
         /// <param name="y0">Die Anfangshöhe in m</param>
         /// <param name="ys">Der zu erreichende Scheitelpunkt in m</param>
         /// <returns></returns>
-        public static double Winkel(double v0, double y0, double ys) 
+        public static double Abwurfwinkel(double v0, double y0, double ys) 
         {
             var alpha = Math.Asin(Math.Sqrt(2 * (ys - y0) / C2(v0)));
 
             return alpha;
+        }
+
+        /// <summary>
+        /// Berechnet den Aufprallwinkel im Bogemaß (RAD) an Hand der Geschwindigkeit, Anfangshöhe und Abwurfwinkel.
+        /// </summary>
+        /// <param name="v0">Die Anfangsgeschwindigkeit in m/s</param>
+        /// <param name="y0">Die Anfangshöhe in m</param>
+        /// <param name="alpha">Der Abwurfwinkel im Bogenmaß (RAD)</param>
+        public static double AufprallWinkel(double v0, double y0, double alpha) 
+        {
+
+            var spy = ScheitelpunktY(v0, y0, alpha);
+            var tsp = Math.Sqrt(2 * spy / Naturkonstante.G);
+            var vy  = tsp * Naturkonstante.G;
+
+            var ap = Math.Atan(vy / (v0 * Math.Cos(alpha)));
+            return ap;
+        }
+
+        /// <summary>
+        /// Berechnet die Aufprallgeschwindigkeit in m/s an Hand der Geschwindigkeit, Anfangshöhe und Abwurfwinkel.
+        /// </summary>
+        /// <param name="v0">Die Anfangsgeschwindigkeit in m/s</param>
+        /// <param name="y0">Die Anfangshöhe in m</param>
+        /// <param name="alpha">Der Abwurfwinkel im Bogenmaß (RAD)</param>
+        public static double AufprallGeschwindigkeit(double v0, double y0, double alpha) 
+        {
+            var vx = v0 * Math.Cos(alpha);
+            var ap = AufprallWinkel(v0, y0, alpha);
+            return vx / Math.Cos(ap);
         }
 
         public static double Flugzeit(double v0, double y0, double alpha) //V0 Geschwindigeit, alpha schanzenwinkel
@@ -67,6 +97,8 @@ namespace Berechnung {
         static double C2(double v0) {
             return (v0 * v0)/ Naturkonstante.G ;
         }
+
+        
 
     }
 
