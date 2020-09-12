@@ -33,14 +33,9 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-
-        <TextBox Margin="5,22,0,0"
-                 x:Name="OutputTab1"
-                 Grid.Row="0" Grid.Column="1"
-                 Style="{StaticResource OutputStyle}"
-                  />
+     
 
         <TabControl Grid.Column="0" Grid.Row="0">
            
@@ -82,95 +77,8 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Winkel">
-
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30*" MinHeight="10" MaxHeight="30" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="{StaticResource Zeilenabstand}" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="{StaticResource Zeilenabstand}" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="{StaticResource Zeilenabstand}" />
-
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30*" MinWidth="10" MaxWidth="30" />
-                        <ColumnDefinition Width="269*" MinWidth="269" />
-                        <ColumnDefinition Width="330*" MinWidth="200" />
-                        <ColumnDefinition Width="37" />
-                        <ColumnDefinition Width="213*" MinWidth="200" />
-                        <ColumnDefinition Width="330*" MinWidth="200" />
-                        <ColumnDefinition Width="30*" MinWidth="10" MaxWidth="30" />
-                    </Grid.ColumnDefinitions>
-
-                    <Label Content="Absprung Winkel" Grid.Row="1" Grid.Column="1" />
-                    <Label Name="AbsprungWinkelText_Tab2" Content="0" Grid.Row="1" Grid.Column="2" />
-
-                    <Label Content="Absprung Geschwindigkeit" Grid.Row="3" Grid.Column="1" />
-                    <TextBox Name="AbsprungGeschwindigkeitTextBox_Tab2" Text="0" Grid.Row="3" Grid.Column="2" />
-
-                    <Label Content="Sprung Entfernung" Grid.Row="1" Grid.Column="4" />
-                    <Label Name="SprungEntfernungText_Tab2" Content="0" Grid.Row="1" Grid.Column="5" />
-
-                    <Label Content="Sprung Höhe" Grid.Row="3" Grid.Column="4" />
-                    <TextBox Name="SprungHöheTextBox_Tab2" Text="0" Grid.Row="3" Grid.Column="5" />
-
-
-                    <Button Content="Berechnen"
-                            Grid.Column="5"
-                            Grid.Row="5"
-                            Click="OnBerechneClickTab2" />
-                </Grid>
-
-            </TabItem>
-            <TabItem Header="Geschwindikeit">
-
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30*" MinHeight="10" MaxHeight="30" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="{StaticResource Zeilenabstand}" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="{StaticResource Zeilenabstand}" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="{StaticResource Zeilenabstand}" />
-
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30*" MinWidth="10" MaxWidth="30" />
-                        <ColumnDefinition Width="269*" MinWidth="269" />
-                        <ColumnDefinition Width="330*" MinWidth="200" />
-                        <ColumnDefinition Width="37" />
-                        <ColumnDefinition Width="213*" MinWidth="200" />
-                        <ColumnDefinition Width="330*" MinWidth="200" />
-                        <ColumnDefinition Width="30*" MinWidth="10" MaxWidth="30" />
-                    </Grid.ColumnDefinitions>
-
-                    <TextBox Name="AbsprungWinkelTextBox_Tab3" Text="0" Grid.Row="1" Grid.Column="2" />
-
-                    <TextBox Name="SprungEntfernungTextBox_Tab3" Text="0" Grid.Row="1" Grid.Column="5" />
-
-                    <TextBox Name="AbsprungGeschwindigkeitTextBox_Tab3" Text="0" Grid.Row="3" Grid.Column="2" />
-
-                    <TextBox Name="SprungHöheTextBox_Tab3" Text="0" Grid.Row="3" Grid.Column="5" />
-
-
-                    <Label Content="Absprung Winkel" Grid.Row="1" Grid.Column="1" />
-
-                    <Label Content="Absprung Geschwindigkeit" Grid.Row="3" Grid.Column="1" />
-                    <Label Content="Sprung Höhe" Grid.Row="3" Grid.Column="4" />
-
-                    <Label Content="Sprung Entfernung" Grid.Row="1" Grid.Column="4" />
-
-                    <Button Content="Berechnen" Grid.Column="5" Grid.Row="5"
-                            Click="OnBerechneClickTab3" />
-                </Grid>
-
-            </TabItem>
         </TabControl>
-        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+        <Grid Grid.Row="1" Grid.ColumnSpan="1">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="500*" MinHeight="200" />
@@ -184,6 +92,35 @@
 
             <CheckBox Grid.Row="0" IsChecked="{Binding ElementName=SchanzenVisualisierung, Path=RenderMetrics}">Metriken anzeigen</CheckBox>
         </Grid>
+
+        <Expander Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" 
+                 IsExpanded="True"
+                  ExpandDirection ="Left" >
+            <Expander.Header>
+                <Label FontWeight ="Bold">
+                    <Label.LayoutTransform>
+                        <RotateTransform Angle="90"/>
+                    </Label.LayoutTransform>
+                    Info
+                </Label>
+            </Expander.Header>
+            <Grid Width="250">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label>Test</Label>
+                <ListBox Grid.Row="1">
+                <ListBoxItem>Bla</ListBoxItem>
+                </ListBox>
+                <TextBox  Grid.Row="2"
+                         x:Name="OutputTab1"
+                         Style="{StaticResource OutputStyle}"
+                />
+            </Grid>
+            
+        </Expander>
 
     </Grid>
 
