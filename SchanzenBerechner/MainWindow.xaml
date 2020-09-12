@@ -9,36 +9,37 @@
         mc:Ignorable="d"
         d:Height="800" d:Width="1024"
         Title="Schanzen Rechner">
-  
+
     <Window.Resources>
         <GridLength x:Key="Zeilenabstand">4.0</GridLength>
         <Style TargetType="TextBox">
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
-        <Style x:Key="OutputStyle" TargetType="TextBox"  >
-            <Setter Property="VerticalContentAlignment" Value="Top"/>
-            <Setter Property="IsReadOnly" Value="True"/>
-            <Setter Property="FontFamily" Value="Consolas"/>
+        <Style x:Key="OutputStyle" TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Top" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="FontFamily" Value="Consolas" />
         </Style>
         <Style TargetType="Label">
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
     </Window.Resources>
 
     <Grid Margin="10">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="140" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-     
+
 
         <TabControl Grid.Column="0" Grid.Row="0">
-           
+
             <TabItem Header="Entfernung u. Höhe">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -54,9 +55,9 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30*" MinWidth="10" MaxWidth="30" />
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="50"  />
+                        <ColumnDefinition Width="50" />
                         <ColumnDefinition Width="30" />
-                        <ColumnDefinition Width="Auto"  />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
                     <Label Content="Absprung Winkel in Grad" Grid.Row="1" Grid.Column="1" />
@@ -68,9 +69,8 @@
                     <Label Content="Absprung Höhe in cm" Grid.Row="5" Grid.Column="1" />
                     <TextBox Name="AbsprungHöheTextBox_Tab1" Text="20" Grid.Row="5" Grid.Column="2" />
 
-                   
-                   
-                    <Button Content="Berechnen" IsDefault="True" 
+
+                    <Button Content="Berechnen" IsDefault="True"
                             Grid.Column="4"
                             Grid.Row="5"
                             Click="OnBerechnenClickTab1" />
@@ -78,14 +78,14 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Grid Grid.Row="1" Grid.ColumnSpan="1">
+        <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="500*" MinHeight="200" />
                 <RowDefinition Height="30*" MinHeight="10" MaxHeight="30" />
             </Grid.RowDefinitions>
 
-            <Viewbox Grid.Row="0"  Stretch="Uniform">
+            <Viewbox Grid.Row="0" Stretch="Uniform">
                 <local:SchanzenVisualisierung x:Name="SchanzenVisualisierung" />
 
             </Viewbox>
@@ -93,33 +93,44 @@
             <CheckBox Grid.Row="0" IsChecked="{Binding ElementName=SchanzenVisualisierung, Path=RenderMetrics}">Metriken anzeigen</CheckBox>
         </Grid>
 
-        <Expander Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" 
-                 IsExpanded="True"
-                  ExpandDirection ="Left" >
+        <Expander Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+                  Margin="5,0,0,0"
+                  IsExpanded="True"
+                  ExpandDirection="Left">
             <Expander.Header>
-                <Label FontWeight ="Bold">
+                <Label FontWeight="Bold">
                     <Label.LayoutTransform>
-                        <RotateTransform Angle="90"/>
+                        <RotateTransform Angle="90" />
                     </Label.LayoutTransform>
                     Info
                 </Label>
             </Expander.Header>
-            <Grid Width="250">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Label>Test</Label>
-                <ListBox Grid.Row="1">
-                <ListBoxItem>Bla</ListBoxItem>
-                </ListBox>
-                <TextBox  Grid.Row="2"
-                         x:Name="OutputTab1"
-                         Style="{StaticResource OutputStyle}"
-                />
-            </Grid>
-            
+
+            <Border Background="#DBDBDB" 
+                    BorderBrush="#A5A5A5"
+                    BorderThickness="1"
+                    Padding="5,0,5,5">
+                <Grid Width="250">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="21" />
+                        <RowDefinition Height="112" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Height="24">Test</Label>
+                    <ListBox Grid.Row="1"
+                             Margin="0,5,0,0"
+                             >
+                        <ListBoxItem>
+                            Bla
+                        </ListBoxItem>
+                    </ListBox>
+
+                    <TextBox Grid.Row="2"
+                             Margin="0,5,0,0"
+                             x:Name="OutputTab1"
+                             Style="{StaticResource OutputStyle}" Grid.RowSpan="2" />
+                </Grid>
+            </Border>
         </Expander>
 
     </Grid>
