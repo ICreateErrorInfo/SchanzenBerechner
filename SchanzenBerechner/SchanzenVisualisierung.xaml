@@ -6,11 +6,24 @@
              xmlns:local="clr-namespace:SchanzenBerechner"
              xmlns:model="clr-namespace:SchanzenBerechner.Model"
              xmlns:shapes="clr-namespace:ICreateErrorInfo.Shapes;assembly=ICreateErrorInfo.Shapes"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              d:DataContext="{d:DesignInstance Type=model:SchanzenVisualisierungViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        
+        <system:Double x:Key="TangentenStrokeSize">2.0</system:Double>
+        <SolidColorBrush x:Key="BodenBrush" Color="#DBDBDB" />
+        <SolidColorBrush x:Key="SchanzenBrush" Color="#ED7D31" />
+        <SolidColorBrush x:Key="SchanzenPenBrush" Color="#3A3838" />
+        <SolidColorBrush x:Key="FlugbahnPenBrush" Color="Black" />
+
+        <SolidColorBrush x:Key="WinkelLineBrush" Color="#70AD47" />
+        <SolidColorBrush x:Key="WinkelBrush" Color="#C5E0B3" />
+        <SolidColorBrush x:Key="TangentenPenBrush" Color="#4472C4" />
+        <SolidColorBrush x:Key="LängenPfeilBrush" Color="#ED7D31" />
+        <SolidColorBrush x:Key="ScheitelpunktBrush" Color="#ED7D31" />
 
         <DrawingBrush x:Key="HatchBrush" TileMode="Tile"
                       Viewport="0,0,30,30" ViewportUnits="Absolute"
@@ -18,7 +31,7 @@
             <DrawingBrush.Drawing>
                 <GeometryDrawing>
                     <GeometryDrawing.Pen>
-                        <Pen Brush="Black" Thickness="2" />
+                        <Pen Brush="{StaticResource BodenBrush}" Thickness="2" />
                     </GeometryDrawing.Pen>
                     <GeometryDrawing.Geometry>
                         <Geometry>M0,0 L30,30 M15,-15 L45,15 M-15,15 L15,45</Geometry>
@@ -26,9 +39,7 @@
                 </GeometryDrawing>
             </DrawingBrush.Drawing>
         </DrawingBrush>
-        <SolidColorBrush x:Key="WinkelBrush" Color="#E7F0E7" />
-        <SolidColorBrush x:Key="WinkelLineBrush" Color="#036403" />
-        <SolidColorBrush x:Key="SchanzenBrush" Color="#FF9B31" />
+        
     </UserControl.Resources>
 
     <Grid>
@@ -48,18 +59,18 @@
             <!--Boden-->
             <Canvas Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}">
 
-                <Rectangle Fill="{StaticResource HatchBrush}"
+                <Rectangle Stroke="{StaticResource BodenBrush}" StrokeThickness="2" Fill="{StaticResource HatchBrush}"
                            Canvas.Left="0"
-                           Canvas.Top="-20"
-                           Width="{Binding CanvasWidth}" Height="20" />
+                           Canvas.Top="-60"
+                           Width="{Binding CanvasWidth}" Height="60" />
 
-                <Line X1="0" Y1="0" X2="{Binding CanvasWidth}" Y2="0"
-                      Stroke="Black"
-                      StrokeThickness="2" />
+                <!--<Line X1="0" Y1="0" X2="{Binding CanvasWidth}" Y2="0"
+                      Stroke="{StaticResource BodenBrush}"
+                      StrokeThickness="2" />-->
             </Canvas>
 
             <!-- Schanze-->
-            <Path Stroke="Black"
+            <Path Stroke="{StaticResource SchanzenPenBrush}"
                   StrokeThickness="2"
                   Fill="{StaticResource SchanzenBrush}">
                 <Path.Data>
@@ -75,7 +86,8 @@
             </Path>
 
             <!--Flugbahn--> <!--StrokeDashArray="4 4"-->
-            <Path Stroke="Black"
+            <Path Stroke="{StaticResource FlugbahnPenBrush}"
+                  StrokeDashArray="4 4"
                   StrokeThickness="2">
 
                 <Path.Data>
@@ -91,11 +103,11 @@
             <!--Metriken-->
             <Canvas Visibility="{Binding RenderMetrics, Converter={StaticResource BooleanToVisibilityConverter}}">
 
-
                 <!--Tangente Absprungwinkel-->
                 <Line
                     Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    Stroke="Blue" StrokeThickness="1"
+                    Stroke="{StaticResource TangentenPenBrush}" 
+                    StrokeThickness="{StaticResource TangentenStrokeSize}"
                     X1="{Binding Flugbahn.StartPunkt.X}"
                     Y1="{Binding Flugbahn.StartPunkt.Y}"
                     X2="{Binding Flugbahn.AbsprungTangentenKontrollpunkt2.X}"
@@ -105,7 +117,8 @@
                 <Line
                     Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}"
 
-                    Stroke="Blue" StrokeThickness="1"
+                    Stroke="{StaticResource TangentenPenBrush}"
+                    StrokeThickness="{StaticResource TangentenStrokeSize}"
                     X1="{Binding Flugbahn.StartPunkt.X}"
                     Y1="{Binding Flugbahn.StartPunkt.Y}"
                     X2="{Binding Flugbahn.AbsprungTangentenKontrollpunkt1.X}"
@@ -114,7 +127,9 @@
                 <!--Winkelzeichen Absprungwinkel-->
                 <Path
                     Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    Stroke="{StaticResource WinkelLineBrush}" StrokeThickness="1" Fill="{StaticResource WinkelBrush}">
+                    Stroke="{StaticResource WinkelLineBrush}" 
+                    StrokeThickness="1" 
+                    Fill="{StaticResource WinkelBrush}">
                     <Path.Data>
                         <PathGeometry>
                             <PathFigure
@@ -131,7 +146,8 @@
                 <!--Tangente Aufprallwinkel-->
                 <Line
                     Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    Stroke="Blue" StrokeThickness="1"
+                    Stroke="{StaticResource TangentenPenBrush}"
+                    StrokeThickness="{StaticResource TangentenStrokeSize}"
                     X1="{Binding Flugbahn.EndPunkt.X}"
                     Y1="{Binding Flugbahn.EndPunkt.Y}"
                     X2="{Binding Flugbahn.AufprallTangentenKontrollpunkt2.X}"
@@ -141,7 +157,8 @@
                 <Line
                     Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}"
 
-                    Stroke="Blue" StrokeThickness="1"
+                    Stroke="{StaticResource TangentenPenBrush}"
+                    StrokeThickness="{StaticResource TangentenStrokeSize}"
                     X1="{Binding Flugbahn.EndPunkt.X}"
                     Y1="{Binding Flugbahn.EndPunkt.Y}"
                     X2="{Binding Flugbahn.AufprallTangentenKontrollpunkt1.X}"
@@ -150,7 +167,9 @@
                 <!--Winkelzeichen Aufprallwinkel-->
                 <Path
                     Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    Stroke="{StaticResource WinkelLineBrush}" StrokeThickness="1" Fill="{StaticResource WinkelBrush}">
+                    Stroke="{StaticResource WinkelLineBrush}" 
+                    StrokeThickness="1" 
+                    Fill="{StaticResource WinkelBrush}">
                     <Path.Data>
                         <PathGeometry>
                             <PathFigure
@@ -169,8 +188,8 @@
                     Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}"
                     IsArrowClosed="true"
                     ArrowAngle="30"
-                    Fill="Red"
-                    Stroke="Red"
+                    Fill="{StaticResource LängenPfeilBrush}"
+                    Stroke="{StaticResource LängenPfeilBrush}"
                     StrokeThickness="2"
                     ArrowedEnds="Both"
                     X1="{Binding Flugbahn.Scheitelpunkt.X}"
@@ -181,8 +200,8 @@
                 <!--Endpunkt Höhe-->
                 <Path
                     Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    Stroke="Black"
-                    Fill="Black"
+                    Stroke="{StaticResource ScheitelpunktBrush}"
+                    Fill="{StaticResource ScheitelpunktBrush}"
                     StrokeThickness="1">
                     <Path.Data>
                         <EllipseGeometry Center="{Binding Flugbahn.Scheitelpunkt}" RadiusX="2" RadiusY="2" />
@@ -194,8 +213,8 @@
                     Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}"
                     IsArrowClosed="true"
                     ArrowAngle="30"
-                    Fill="Red"
-                    Stroke="Red"
+                    Fill="{StaticResource LängenPfeilBrush}"
+                    Stroke="{StaticResource LängenPfeilBrush}"
                     StrokeThickness="2"
                     ArrowedEnds="Both"
                     X1="{Binding Flugbahn.StartPunkt.X}"
