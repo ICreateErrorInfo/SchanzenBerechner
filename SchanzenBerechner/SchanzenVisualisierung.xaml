@@ -19,11 +19,11 @@
         <SolidColorBrush x:Key="SchanzenPenBrush" Color="#3A3838" />
         <SolidColorBrush x:Key="FlugbahnPenBrush" Color="Black" />
 
-        <SolidColorBrush x:Key="WinkelLineBrush" Color="#70AD47" />
-        <SolidColorBrush x:Key="WinkelBrush" Color="#C5E0B3" />
+        <SolidColorBrush x:Key="WinkelLineBrush" Color="#4472C4" />
+        <SolidColorBrush x:Key="WinkelBrush" Color="#BDD7EE" />
         <SolidColorBrush x:Key="TangentenPenBrush" Color="#4472C4" />
-        <SolidColorBrush x:Key="LängenPfeilBrush" Color="#ED7D31" />
-        <SolidColorBrush x:Key="ScheitelpunktBrush" Color="#ED7D31" />
+        <SolidColorBrush x:Key="LängenPfeilBrush" Color="#70AD47" />
+        <SolidColorBrush x:Key="ScheitelpunktBrush" Color="Black" />
 
         <DrawingBrush x:Key="HatchBrush" TileMode="Tile"
                       Viewport="0,0,30,30" ViewportUnits="Absolute"

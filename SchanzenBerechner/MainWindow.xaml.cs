@@ -12,7 +12,7 @@ namespace SchanzenBerechner {
 
         public MainWindow() {
             InitializeComponent();
-            OnBerechnenClickTab1(this,null);
+            OnBerechnenClickTab1(this, null);
         }
 
         private void OnBerechnenClickTab1(object sender, RoutedEventArgs e) {
@@ -33,6 +33,7 @@ namespace SchanzenBerechner {
                 SchanzenVisualisierung.Schanze  = null;
                 SchanzenVisualisierung.Flugbahn = null;
             }
+
         }
 
     }
