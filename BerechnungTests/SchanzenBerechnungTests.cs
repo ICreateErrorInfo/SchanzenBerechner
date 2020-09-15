@@ -1,4 +1,5 @@
 ﻿using Berechnung;
+using Berechnung.Einheiten;
 
 using NUnit.Framework;
 
@@ -11,7 +12,7 @@ namespace BerechnungTests {
         public void Test1() {
 
             var winkel     = Winkel.FromDeg(19);
-            var höhe       = 0.16;
+            var höhe       = Länge.FromCentimeter(16);
             var berechnung = Schanze.Create(höhe, winkel);
 
             Assert.That(berechnung,                    Is.Not.Null);

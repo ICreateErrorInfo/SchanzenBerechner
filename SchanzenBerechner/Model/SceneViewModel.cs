@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows;
 
 using Berechnung;
+using Berechnung.Einheiten;
 
 #endregion
 
@@ -21,9 +22,9 @@ namespace SchanzenBerechner.Model {
         public SceneViewModel(Schanze schanze = null, Flugbahn flugbahn = null) {
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject())) {
 
-                var    winkel          = Winkel.FromDeg(22);
-                var    geschwindigkeit = Geschwindigkeit.FromKmProH(20);
-                double schanzenHöhe    = 0.16;
+                var winkel          = Winkel.FromDeg(22);
+                var geschwindigkeit = Geschwindigkeit.FromKilometerProStunde(20);
+                var schanzenHöhe    = Länge.FromCentimeter(16);
 
                 schanze  = Berechnung.Schanze.Create(schanzenHöhe, winkel);
                 flugbahn = Berechnung.Flugbahn.Create(schanze, geschwindigkeit);
@@ -138,13 +139,13 @@ namespace SchanzenBerechner.Model {
             var height = 1.0;
 
             if (schanze != null) {
-                width  = schanze.Länge;
-                height = schanze.Höhe;
+                width  = schanze.Länge.Meter;
+                height = schanze.Höhe.Meter;
             }
 
             if (flugbahn != null) {
-                width  += flugbahn.SprungWeite;
-                height =  Math.Max(flugbahn.ScheitelpunktY, height);
+                width  += flugbahn.SprungWeite.Meter;
+                height =  Math.Max(flugbahn.ScheitelpunktY.Meter, height);
             }
 
             return new Size(width, height);
@@ -153,18 +154,18 @@ namespace SchanzenBerechner.Model {
         public string ToDisplayString() {
             var sb = new StringBuilder();
             if (_orgFlugbahn != null) {
-                sb.AppendLine($"Absprunggeschwindigkeit: {_orgFlugbahn.AbsprungGeschwindigkeit.KmProH:F2}km/h");
-                sb.AppendLine($"Aufprallgeschwindigkeit: {_orgFlugbahn.AufprallGeschwindigkeit.KmProH:F2}km/h");
+                sb.AppendLine($"Absprunggeschwindigkeit: {_orgFlugbahn.AbsprungGeschwindigkeit.KilometerProStunde:F2}km/h");
+                sb.AppendLine($"Aufprallgeschwindigkeit: {_orgFlugbahn.AufprallGeschwindigkeit.KilometerProStunde:F2}km/h");
                 sb.AppendLine($"Absprungwinkel:          {_orgFlugbahn.AbsprungWinkel.Deg:F2}°");
                 sb.AppendLine($"Aufprallwinkel:          {_orgFlugbahn.AufprallWinkel.Deg:F2}°");
-                sb.AppendLine($"Sprunghöhe:              {_orgFlugbahn.ScheitelpunktY:F2}m");
-                sb.AppendLine($"Sprungweite:             {_orgFlugbahn.SprungWeite:F2}m");
+                sb.AppendLine($"Sprunghöhe:              {_orgFlugbahn.ScheitelpunktY.Meter:F2}m");
+                sb.AppendLine($"Sprungweite:             {_orgFlugbahn.SprungWeite.Meter:F2}m");
             }
 
             if (_orgSchanze != null) {
-                sb.AppendLine($"Schanzenhöhe:            {_orgSchanze.Höhe:F2}m");
-                sb.AppendLine($"Schanzenlänge:           {_orgSchanze.Länge:F2}m");
-                sb.AppendLine($"Schanzenradius:          {_orgSchanze.Radius:F2}m");
+                sb.AppendLine($"Schanzenhöhe:            {_orgSchanze.Höhe.Meter:F2}m");
+                sb.AppendLine($"Schanzenlänge:           {_orgSchanze.Länge.Meter:F2}m");
+                sb.AppendLine($"Schanzenradius:          {_orgSchanze.Radius.Meter:F2}m");
             }
 
             return sb.ToString();

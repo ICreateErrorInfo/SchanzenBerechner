@@ -2,6 +2,7 @@
 using System.Windows;
 
 using Berechnung;
+using Berechnung.Einheiten;
 
 using SchanzenBerechner.Model;
 
@@ -21,8 +22,8 @@ namespace SchanzenBerechner {
             try {
 
                 var winkel          = Winkel.FromDeg(double.Parse(AbsprungWinkelTextBox_Tab1.Text));
-                var geschwindigkeit = Geschwindigkeit.FromKmProH(double.Parse(AbsprungGeschwindigkeitTextBox_Tab1.Text));
-                var schanzenHöhe    = double.Parse(AbsprungHöheTextBox_Tab1.Text) * 0.01;
+                var geschwindigkeit = Geschwindigkeit.FromKilometerProStunde(double.Parse(AbsprungGeschwindigkeitTextBox_Tab1.Text));
+                var schanzenHöhe    = Länge.FromCentimeter(double.Parse(AbsprungHöheTextBox_Tab1.Text));
 
                 var schanze   = Schanze.Create(schanzenHöhe, winkel);
                 var flugbahn  = Flugbahn.Create(schanze, geschwindigkeit);

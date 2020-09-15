@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Berechnung {
+namespace Berechnung.Einheiten {
 
     public readonly struct Winkel: IEquatable<Winkel> {
 
@@ -29,7 +29,7 @@ namespace Berechnung {
         /// <summary>
         /// Erstellt einen Winkel mit dem angegeben Wert in Grad.
         /// </summary>
-        public static Winkel FromDeg(double rad) => new Winkel(ToRad(rad));
+        public static Winkel FromDeg(double deg) => new Winkel(ToRad(deg));
 
         /// <summary>
         /// Umrechnung von Radiant zu Grad 

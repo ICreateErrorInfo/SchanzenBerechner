@@ -1,18 +1,20 @@
-﻿namespace Berechnung {
+﻿using Berechnung.Einheiten;
+
+namespace Berechnung {
 
     public class Flugbahn {
 
-        private readonly double _absprungHöhe;
-        private readonly double _sprungWeite;
-        private readonly double _scheitelpunktX;
-        private readonly double _scheitelpunktY;
+        private readonly Länge _absprungHöhe;
+        private readonly Länge _sprungWeite;
+        private readonly Länge _scheitelpunktX;
+        private readonly Länge _scheitelpunktY;
 
-        Flugbahn(double absprungHöhe,
+        Flugbahn(Länge absprungHöhe,
                  Winkel absprungWinkel,
                  Geschwindigkeit absprungGeschwindigkeit,
-                 double sprungWeite,
-                 double scheitelpunktX,
-                 double scheitelpunktY,
+                 Länge sprungWeite,
+                 Länge scheitelpunktX,
+                 Länge scheitelpunktY,
                  Winkel aufprallWinkel,
                  Geschwindigkeit aufprallGeschwindigkeit,
                  double scale) {
@@ -29,10 +31,10 @@
 
         }
 
-        public double AbsprungHöhe   => _absprungHöhe   * Scale;
-        public double SprungWeite    => _sprungWeite    * Scale;
-        public double ScheitelpunktX => _scheitelpunktX * Scale;
-        public double ScheitelpunktY => _scheitelpunktY * Scale;
+        public Länge AbsprungHöhe   => _absprungHöhe   * Scale;
+        public Länge SprungWeite    => _sprungWeite    * Scale;
+        public Länge ScheitelpunktX => _scheitelpunktX * Scale;
+        public Länge ScheitelpunktY => _scheitelpunktY * Scale;
 
         public Geschwindigkeit AbsprungGeschwindigkeit { get; }
         public Winkel          AbsprungWinkel          { get; }
@@ -41,12 +43,13 @@
 
         public double Scale { get; }
 
-        public double Y(double x) {
-            return Wurfparabel.Y(
-                x: x / Scale,
-                v0: AbsprungGeschwindigkeit.MProS,
-                alpha: AbsprungWinkel.Rad,
-                y0: _absprungHöhe) * Scale;
+        public Länge Y(double x) {
+            return Länge.FromMeter(
+                Wurfparabel.Y(
+                    x: x / Scale,
+                    v0: AbsprungGeschwindigkeit.MeterProSekunde,
+                    alpha: AbsprungWinkel.Rad,
+                    y0: _absprungHöhe.Meter) * Scale);
         }
 
         public Flugbahn WithScale(double scale) {
@@ -67,30 +70,30 @@
             Geschwindigkeit absprungGeschwindigkeit) {
 
             var weite = Wurfparabel.Weite(
-                v0: absprungGeschwindigkeit.MProS,
-                y0: schanze.Höhe,
+                v0: absprungGeschwindigkeit.MeterProSekunde,
+                y0: schanze.Höhe.Meter,
                 alpha: schanze.Absprungwinkel.Rad);
 
             var scheitelpunktX = Wurfparabel.ScheitelpunktX(
-                v0: absprungGeschwindigkeit.MProS,
-                y0: schanze.Höhe,
+                v0: absprungGeschwindigkeit.MeterProSekunde,
+                y0: schanze.Höhe.Meter,
                 alpha: schanze.Absprungwinkel.Rad
             );
 
             var höhe = Wurfparabel.ScheitelpunktY(
-                v0: absprungGeschwindigkeit.MProS,
-                y0: schanze.Höhe,
+                v0: absprungGeschwindigkeit.MeterProSekunde,
+                y0: schanze.Höhe.Meter,
                 alpha: schanze.Absprungwinkel.Rad);
 
             var aufprallWinkel = Wurfparabel.AufprallWinkel(
-                v0: absprungGeschwindigkeit.MProS,
-                y0: schanze.Höhe,
+                v0: absprungGeschwindigkeit.MeterProSekunde,
+                y0: schanze.Höhe.Meter,
                 alpha: schanze.Absprungwinkel.Rad
             );
 
             var aufprallGeschwindigkeit = Wurfparabel.AufprallGeschwindigkeit(
-                v0: absprungGeschwindigkeit.MProS,
-                y0: schanze.Höhe,
+                v0: absprungGeschwindigkeit.MeterProSekunde,
+                y0: schanze.Höhe.Meter,
                 alpha: schanze.Absprungwinkel.Rad
             );
 
@@ -98,11 +101,11 @@
                 absprungHöhe: schanze.Höhe,
                 absprungWinkel: schanze.Absprungwinkel,
                 absprungGeschwindigkeit: absprungGeschwindigkeit,
-                sprungWeite: weite,
-                scheitelpunktX: scheitelpunktX,
-                scheitelpunktY: höhe,
+                sprungWeite: Länge.FromMeter(weite),
+                scheitelpunktX: Länge.FromMeter(scheitelpunktX),
+                scheitelpunktY: Länge.FromMeter(höhe),
                 aufprallWinkel: Winkel.FromRad(aufprallWinkel),
-                aufprallGeschwindigkeit: Geschwindigkeit.FromMProS(aufprallGeschwindigkeit),
+                aufprallGeschwindigkeit: Geschwindigkeit.FromMeterProSekunde(aufprallGeschwindigkeit),
                 scale: 1);
         }
 

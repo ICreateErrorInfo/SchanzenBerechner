@@ -12,14 +12,14 @@ namespace SchanzenBerechner.Model {
 
             var punkte   = new List<Point>();
             var segments = 100;
-            var step     = (int) flugbahn.SprungWeite / segments;
+            var step     = (int) flugbahn.SprungWeite.Meter / segments;
 
             // Horizontaler Offset, wenn Schnaze vorhanden
-            var x0 = schanze?.Länge ?? 0;
+            var x0 = schanze?.Länge.Meter ?? 0;
 
             // Absprungpunkt
             var x = 0.0;
-            var y = flugbahn.Y(x);
+            var y = flugbahn.Y(x).Meter;
             StartPunkt = new Point(x0 + x, y);
             punkte.Add(StartPunkt);
 
@@ -27,21 +27,21 @@ namespace SchanzenBerechner.Model {
             for (int i = 1; i <= segments; i++) {
 
                 x = i * step;
-                y = flugbahn.Y(x);
+                y = flugbahn.Y(x).Meter;
 
                 punkte.Add(new Point(x0 + x, y));
             }
 
             // Aufprallpunkt
-            x = flugbahn.SprungWeite;
-            y = flugbahn.Y(x);
+            x = flugbahn.SprungWeite.Meter;
+            y = flugbahn.Y(x).Meter;
 
             EndPunkt = new Point(x0 + x, y);
             punkte.Add(EndPunkt);
 
             Punkte = new PointCollection(punkte);
 
-            Scheitelpunkt = new Point(x0 + flugbahn.ScheitelpunktX, flugbahn.ScheitelpunktY);
+            Scheitelpunkt = new Point(x0 + flugbahn.ScheitelpunktX.Meter, flugbahn.ScheitelpunktY.Meter);
 
             var winkelSize     = flugbahn.Scale * 0.2;
             var tangentenLänge = flugbahn.Scale;

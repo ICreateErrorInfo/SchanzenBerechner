@@ -1,45 +1,42 @@
 ﻿using System;
 
-namespace Berechnung {
+namespace Berechnung.Einheiten {
 
     public readonly struct Geschwindigkeit: IEquatable<Geschwindigkeit> {
 
-        readonly double _geschwindigkeit;
-
-        Geschwindigkeit(double geschwindigkeit) {
-            _geschwindigkeit = geschwindigkeit;
-
+        Geschwindigkeit(double meterProSekunde) {
+            MeterProSekunde = meterProSekunde;
         }
-
-        /// <summary>
-        /// Die Geschwindigkeit in km/h
-        /// </summary>
-        public double KmProH => ToKmProH(_geschwindigkeit);
 
         /// <summary>
         /// Die Geschwindigkeit in m/s
         /// </summary>
-        public double MProS => _geschwindigkeit;
+        public double MeterProSekunde { get; }
+
+        /// <summary>
+        /// Die Geschwindigkeit in km/h
+        /// </summary>
+        public double KilometerProStunde => ToKilometerProStunde(MeterProSekunde);
 
         /// <summary>
         /// Erstellt eine Geschwindigkeit mit dem angegebenen Wert in m/s.
         /// </summary>
         /// <param name="value">Die Geschwindigkeit in m/s</param>
-        public static Geschwindigkeit FromMProS(double value) => new Geschwindigkeit(value);
+        public static Geschwindigkeit FromMeterProSekunde(double value) => new Geschwindigkeit(value);
 
         /// <summary>
         /// Erstellt eine Geschwindigkeit mit dem angegebenen Wert in km/h.
         /// </summary>
         /// <param name="value">Die Geschwindigkeit in km/h</param>
-        public static Geschwindigkeit FromKmProH(double value) => new Geschwindigkeit(ToMProS(value));
+        public static Geschwindigkeit FromKilometerProStunde(double value) => new Geschwindigkeit(ToFromMeterProSekunde(value));
 
-        public static double ToKmProH(double value) => value * 3.6;
-        public static double ToMProS(double value) => value  / 3.6;
+        static double ToKilometerProStunde(double value) => value  * 3.6;
+        static double ToFromMeterProSekunde(double value) => value / 3.6;
 
         #region Equality members
 
         public bool Equals(Geschwindigkeit other) {
-            return _geschwindigkeit.Equals(other._geschwindigkeit);
+            return MeterProSekunde.Equals(other.MeterProSekunde);
         }
 
         public override bool Equals(object obj) {
@@ -47,7 +44,7 @@ namespace Berechnung {
         }
 
         public override int GetHashCode() {
-            return _geschwindigkeit.GetHashCode();
+            return MeterProSekunde.GetHashCode();
         }
 
         public static bool operator ==(Geschwindigkeit left, Geschwindigkeit right) {

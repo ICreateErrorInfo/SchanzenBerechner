@@ -1,17 +1,19 @@
 ﻿using System;
 
+using Berechnung.Einheiten;
+
 namespace Berechnung {
 
     public class Schanze {
 
-        private readonly double _länge;
-        private readonly double _höhe;
-        private readonly double _radius;
+        private readonly Länge _länge;
+        private readonly Länge _höhe;
+        private readonly Länge _radius;
 
-        Schanze(double länge,
-                double höhe,
+        Schanze(Länge länge,
+                Länge höhe,
                 Winkel absprungwinkel,
-                double radius, double scale) {
+                Länge radius, double scale) {
 
             _länge         = länge;
             _höhe          = höhe;
@@ -21,9 +23,9 @@ namespace Berechnung {
 
         }
 
-        public double Länge          => _länge  * Scale;
-        public double Höhe           => _höhe   * Scale;
-        public double Radius         => _radius * Scale;
+        public Länge  Länge          => _länge  * Scale;
+        public Länge  Höhe           => _höhe   * Scale;
+        public Länge  Radius         => _radius * Scale;
         public Winkel Absprungwinkel { get; }
         public double Scale          { get; }
 
@@ -36,16 +38,16 @@ namespace Berechnung {
                 scale: scale);
         }
 
-        public static Schanze Create(double höhe, Winkel absprungwinkel) {
+        public static Schanze Create(Länge höhe, Winkel absprungwinkel) {
 
-            var radius = höhe   / (1 - Math.Cos(absprungwinkel.Rad));
-            var länge  = radius * Math.Sin(absprungwinkel.Rad);
+            var radius = höhe.Meter / (1 - Math.Cos(absprungwinkel.Rad));
+            var länge  = radius     * Math.Sin(absprungwinkel.Rad);
 
             return new Schanze(
-                länge: länge,
+                länge: Länge.FromMeter(länge),
                 höhe: höhe,
                 absprungwinkel: absprungwinkel,
-                radius: radius,
+                radius: Länge.FromMeter(radius),
                 scale: 1
             );
         }

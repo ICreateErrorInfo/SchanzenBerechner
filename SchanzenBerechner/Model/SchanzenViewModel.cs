@@ -15,12 +15,12 @@ namespace SchanzenBerechner.Model {
 
         public Point StartPunkt => new Point(0, 0);
 
-        public Point AbsprungPunkt => new Point(_schanze.Länge, _schanze.Höhe);
+        public Point AbsprungPunkt => new Point(_schanze.Länge.Meter, _schanze.Höhe.Meter);
 
-        public Point EndPunkt => new Point(_schanze.Länge, 0);
+        public Point EndPunkt => new Point(_schanze.Länge.Meter, 0);
 
-        public Size  RadiusGröße         => new Size(_schanze.Radius, _schanze.Radius);
-        public Point SchanzenMittelpunkt => new Point(0, _schanze.Radius);
+        public Size  RadiusGröße         => new Size(_schanze.Radius.Meter, _schanze.Radius.Meter);
+        public Point SchanzenMittelpunkt => new Point(0, _schanze.Radius.Meter);
 
     }
 
