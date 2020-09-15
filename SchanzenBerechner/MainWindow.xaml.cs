@@ -16,9 +16,13 @@ namespace SchanzenBerechner {
         readonly SceneViewModel _viewModel;
 
         public MainWindow() {
-            _viewModel  = new SceneViewModel();
-            DataContext = _viewModel;
+            _viewModel                       = new SceneViewModel();
+            DataContext                      = _viewModel;
+
             InitializeComponent();
+
+            SchanzenVisualisierung.ViewModel = _viewModel;
+
             OnBerechnenClickTab1(this, null);
         }
 
@@ -36,8 +40,7 @@ namespace SchanzenBerechner {
                 //_viewModel.Settings.Clear();
                 _viewModel.Settings.Add(viewModel);
 
-                SchanzenVisualisierung.ViewModel = viewModel;
-                OutputTab1.Text                  = viewModel.DisplayString;
+                OutputTab1.Text = viewModel.DisplayString;
             } catch (Exception ex) {
                 OutputTab1.Text                  = ex.Message;
                 SchanzenVisualisierung.ViewModel = null;

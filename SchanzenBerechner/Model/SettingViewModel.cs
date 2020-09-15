@@ -19,22 +19,22 @@ namespace SchanzenBerechner.Model {
         readonly Schanze  _orgSchanze;
         readonly Flugbahn _orgFlugbahn;
 
-        public SettingViewModel(): this(null, null) {
+        //public SettingViewModel(): this(null, null) {
 
-        }
+        //}
 
         public SettingViewModel(Schanze schanze = null, Flugbahn flugbahn = null) {
-            if (DesignerProperties.GetIsInDesignMode(new DependencyObject())) {
+            //if (DesignerProperties.GetIsInDesignMode(new DependencyObject())) {
 
-                var winkel          = Winkel.FromDeg(22);
-                var geschwindigkeit = Geschwindigkeit.FromKilometerProStunde(20);
-                var schanzenHöhe    = Länge.FromCentimeter(16);
+            //    var winkel          = Winkel.FromDeg(22);
+            //    var geschwindigkeit = Geschwindigkeit.FromKilometerProStunde(20);
+            //    var schanzenHöhe    = Länge.FromCentimeter(16);
 
-                schanze  = Berechnung.Schanze.Create(schanzenHöhe, winkel);
-                flugbahn = Berechnung.Flugbahn.Create(schanze, geschwindigkeit);
+            //    schanze  = Berechnung.Schanze.Create(schanzenHöhe, winkel);
+            //    flugbahn = Berechnung.Flugbahn.Create(schanze, geschwindigkeit);
 
-                RenderMetrics = true;
-            }
+            //    RenderMetrics = true;
+            //}
 
             _orgSchanze  = schanze;
             _orgFlugbahn = flugbahn;
