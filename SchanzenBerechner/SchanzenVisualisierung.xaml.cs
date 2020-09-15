@@ -11,19 +11,19 @@ namespace SchanzenBerechner {
 
             InitializeComponent();
 
-            ViewModel = new SceneViewModel();
+            ViewModel = new SettingViewModel();
 
         }
 
-        public SceneViewModel ViewModel {
-            get => (SceneViewModel) GetValue(ViewModelProperty);
+        public SettingViewModel ViewModel {
+            get => (SettingViewModel) GetValue(ViewModelProperty);
             set => SetValue(ViewModelProperty, value);
         }
 
         public static readonly DependencyProperty ViewModelProperty =
             DependencyProperty.Register(
                 name: nameof(ViewModel),
-                propertyType: typeof(SceneViewModel),
+                propertyType: typeof(SettingViewModel),
                 ownerType: typeof(SchanzenVisualisierung),
                 typeMetadata: new FrameworkPropertyMetadata(
                     defaultValue: null,

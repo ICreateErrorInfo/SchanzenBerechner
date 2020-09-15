@@ -13,7 +13,11 @@ namespace SchanzenBerechner {
     /// </summary>
     public partial class MainWindow: Window {
 
+        readonly SceneViewModel _viewModel;
+
         public MainWindow() {
+            _viewModel  = new SceneViewModel();
+            DataContext = _viewModel;
             InitializeComponent();
             OnBerechnenClickTab1(this, null);
         }
@@ -27,7 +31,10 @@ namespace SchanzenBerechner {
 
                 var schanze   = Schanze.Create(schanzenHöhe, winkel);
                 var flugbahn  = Flugbahn.Create(schanze, geschwindigkeit);
-                var viewModel = SceneViewModel.Create(schanze, flugbahn);
+                var viewModel = SettingViewModel.Create(schanze, flugbahn);
+
+                //_viewModel.Settings.Clear();
+                _viewModel.Settings.Add(viewModel);
 
                 SchanzenVisualisierung.ViewModel = viewModel;
                 OutputTab1.Text                  = viewModel.DisplayString;

@@ -7,7 +7,7 @@
              xmlns:model="clr-namespace:SchanzenBerechner.Model"
              xmlns:shapes="clr-namespace:ICreateErrorInfo.Shapes;assembly=ICreateErrorInfo.Shapes"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
-             d:DataContext="{d:DesignInstance Type=model:SceneViewModel, IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance Type=model:SettingViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
 
     <UserControl.Resources>
@@ -43,8 +43,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <Canvas x:Name="Canvas"
-                Grid.Row="0"
+        <Canvas Grid.Row="0"
                 UseLayoutRounding="true"
                 SnapsToDevicePixels="true"
                 Width="{Binding CanvasWidth}"
