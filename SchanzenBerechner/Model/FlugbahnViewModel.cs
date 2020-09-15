@@ -6,7 +6,7 @@ using Berechnung;
 
 namespace SchanzenBerechner.Model {
 
-    class FlugbahnViewModel {
+    public class FlugbahnViewModel: ViewModel {
 
         public FlugbahnViewModel(Schanze schanze, Flugbahn flugbahn) {
 

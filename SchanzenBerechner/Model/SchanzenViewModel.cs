@@ -4,7 +4,7 @@ using Berechnung;
 
 namespace SchanzenBerechner.Model {
 
-    class SchanzenViewModel {
+    public class SchanzenViewModel: ViewModel {
 
         private readonly Schanze _schanze;
 

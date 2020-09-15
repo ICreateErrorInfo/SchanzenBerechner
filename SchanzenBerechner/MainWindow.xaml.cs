@@ -3,6 +3,8 @@ using System.Windows;
 
 using Berechnung;
 
+using SchanzenBerechner.Model;
+
 namespace SchanzenBerechner {
 
     /// <summary>
@@ -22,16 +24,15 @@ namespace SchanzenBerechner {
                 var geschwindigkeit = Geschwindigkeit.FromKmProH(double.Parse(AbsprungGeschwindigkeitTextBox_Tab1.Text));
                 var schanzenHöhe    = double.Parse(AbsprungHöheTextBox_Tab1.Text) * 0.01;
 
-                var schanze  = Schanze.Create(schanzenHöhe, winkel);
-                var flugbahn = Flugbahn.Create(schanze, geschwindigkeit);
+                var schanze   = Schanze.Create(schanzenHöhe, winkel);
+                var flugbahn  = Flugbahn.Create(schanze, geschwindigkeit);
+                var viewModel = SceneViewModel.Create(schanze, flugbahn);
 
-                SchanzenVisualisierung.Schanze  = schanze;
-                SchanzenVisualisierung.Flugbahn = flugbahn;
-                OutputTab1.Text                 = SchanzenVisualisierung.ViewModel.DisplayString;
+                SchanzenVisualisierung.ViewModel = viewModel;
+                OutputTab1.Text                  = viewModel.DisplayString;
             } catch (Exception ex) {
-                OutputTab1.Text                 = ex.Message;
-                SchanzenVisualisierung.Schanze  = null;
-                SchanzenVisualisierung.Flugbahn = null;
+                OutputTab1.Text                  = ex.Message;
+                SchanzenVisualisierung.ViewModel = null;
             }
 
         }

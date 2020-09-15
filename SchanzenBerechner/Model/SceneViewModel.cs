@@ -3,7 +3,6 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 
@@ -14,26 +13,34 @@ using Berechnung;
 namespace SchanzenBerechner.Model {
 
     [DebuggerDisplay("{" + nameof(DisplayString) + ",nq}")]
-    class SchanzenVisualisierungViewModel: INotifyPropertyChanged {
+    public class SceneViewModel: ViewModel {
 
-        Schanze  _orgSchanze;
-        Flugbahn _orgFlugbahn;
+        readonly Schanze  _orgSchanze;
+        readonly Flugbahn _orgFlugbahn;
 
-        public SchanzenVisualisierungViewModel() {
+        public SceneViewModel(Schanze schanze = null, Flugbahn flugbahn = null) {
             if (DesignerProperties.GetIsInDesignMode(new DependencyObject())) {
 
                 var    winkel          = Winkel.FromDeg(22);
                 var    geschwindigkeit = Geschwindigkeit.FromKmProH(20);
                 double schanzenHöhe    = 0.16;
 
-                var schanze  = Berechnung.Schanze.Create(schanzenHöhe, winkel);
-                var flugbahn = Berechnung.Flugbahn.Create(schanze, geschwindigkeit);
-
-                Invalidate(schanze, flugbahn);
+                schanze  = Berechnung.Schanze.Create(schanzenHöhe, winkel);
+                flugbahn = Berechnung.Flugbahn.Create(schanze, geschwindigkeit);
 
                 RenderMetrics = true;
             }
 
+            _orgSchanze  = schanze;
+            _orgFlugbahn = flugbahn;
+            _renderScene = true;
+
+            Rescale();
+        }
+
+        public static SceneViewModel Create(Schanze schanze, Flugbahn flugbahn) {
+            var viewModel = new SceneViewModel(schanze, flugbahn);
+            return viewModel;
         }
 
         private SchanzenViewModel _schanzenViewModel;
@@ -79,8 +86,8 @@ namespace SchanzenBerechner.Model {
         bool _renderScene;
 
         public bool RenderScene {
-            get => _renderScene;
-            private set {
+            get => _renderScene && _orgSchanze != null && _orgFlugbahn != null;
+            set {
                 _renderScene = value;
                 OnPropertyChanged();
             }
@@ -96,47 +103,36 @@ namespace SchanzenBerechner.Model {
             }
         }
 
-        string _displayString;
+        public string DisplayString => ToDisplayString();
 
-        public string DisplayString {
-            get => _displayString;
-            set {
-                _displayString = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public void Invalidate(Schanze schanze, Flugbahn flugbahn) {
-
-            _orgSchanze  = schanze;
-            _orgFlugbahn = flugbahn;
-
-            var orgSize = CalculateDesiredCanvasSize(schanze, flugbahn);
+        public void Rescale() {
+            var orgSize = CalculateNaturalSize();
             // Wir sagen es soll alles auf 1000 Pixel Platz haben...
-
             var scale = 1000 / orgSize.Width;
 
-            schanze  = schanze?.WithScale(scale);
-            flugbahn = flugbahn?.WithScale(scale);
+            Rescale(scale);
+        }
 
-            var size = CalculateDesiredCanvasSize(schanze, flugbahn);
+        public void Rescale(double scale) {
+
+            var schanze  = _orgSchanze?.WithScale(scale);
+            var flugbahn = _orgFlugbahn?.WithScale(scale);
+
+            var size = CalculateRequiredCanvasSize(schanze, flugbahn);
 
             CanvasWidth  = size.Width;
             CanvasHeight = size.Height;
 
-            Schanze       = schanze  != null ? new SchanzenViewModel(schanze) : null;
-            Flugbahn      = flugbahn != null ? new FlugbahnViewModel(schanze, flugbahn) : null;
-            RenderScene   = schanze  != null || flugbahn != null;
-            DisplayString = ToDisplayString();
+            Schanze  = schanze  != null ? new SchanzenViewModel(schanze) : null;
+            Flugbahn = flugbahn != null ? new FlugbahnViewModel(schanze, flugbahn) : null;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        void OnPropertyChanged([CallerMemberName] string name = null) {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        Size CalculateNaturalSize() {
+            var naturalSize = CalculateRequiredCanvasSize(_orgSchanze, _orgFlugbahn);
+            return naturalSize;
         }
 
-        static Size CalculateDesiredCanvasSize(Schanze schanze, Flugbahn flugbahn) {
+        static Size CalculateRequiredCanvasSize(Schanze schanze, Flugbahn flugbahn) {
 
             var width  = 1.0;
             var height = 1.0;

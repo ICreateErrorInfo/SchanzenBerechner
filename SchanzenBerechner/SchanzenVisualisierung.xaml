@@ -7,7 +7,7 @@
              xmlns:model="clr-namespace:SchanzenBerechner.Model"
              xmlns:shapes="clr-namespace:ICreateErrorInfo.Shapes;assembly=ICreateErrorInfo.Shapes"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
-             d:DataContext="{d:DesignInstance Type=model:SchanzenVisualisierungViewModel, IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance Type=model:SceneViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
 
     <UserControl.Resources>

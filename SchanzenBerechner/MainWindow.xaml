@@ -98,7 +98,7 @@
 
                 <CheckBox Grid.Row="0"
                           Margin="5"
-                          IsChecked="{Binding ElementName=SchanzenVisualisierung, Path=RenderMetrics}">Metriken anzeigen</CheckBox>
+                          IsChecked="{Binding ElementName=SchanzenVisualisierung, Path=ViewModel.RenderMetrics}" >Metriken anzeigen</CheckBox>
             </Grid>
         </Border>
 
