@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-
+using System.Windows.Media;
 using Berechnung;
 
 namespace SchanzenBerechner.Model {
@@ -12,6 +12,8 @@ namespace SchanzenBerechner.Model {
             _schanze = schanze;
 
         }
+
+        public Schanze Metrics => _schanze.WithScale(1);
 
         public Point StartPunkt          => new Point(x: 0,                    y: 0);
         public Point AbsprungPunkt       => new Point(x: _schanze.Länge.Meter, y: _schanze.Höhe.Meter);

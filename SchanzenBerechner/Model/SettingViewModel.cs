@@ -1,13 +1,11 @@
 ﻿#region Using Directives
 
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Text;
 using System.Windows;
 
 using Berechnung;
-using Berechnung.Einheiten;
 
 #endregion
 
@@ -18,10 +16,6 @@ namespace SchanzenBerechner.Model {
 
         readonly Schanze  _orgSchanze;
         readonly Flugbahn _orgFlugbahn;
-
-        //public SettingViewModel(): this(null, null) {
-
-        //}
 
         public SettingViewModel(Schanze schanze = null, Flugbahn flugbahn = null) {
             //if (DesignerProperties.GetIsInDesignMode(new DependencyObject())) {
@@ -109,6 +103,15 @@ namespace SchanzenBerechner.Model {
         }
 
         public string DisplayString => ToDisplayString();
+
+        public object DisplayName {
+            get {
+                var winkelDeg = _orgSchanze.Absprungwinkel.Deg;
+                var höheCm    = _orgSchanze.Höhe.Centimeter;
+                var v0        = _orgFlugbahn.AbsprungGeschwindigkeit.KilometerProStunde;
+                return $"Winkel: {winkelDeg:F2}, Höhe: {höheCm:F2}cm, v: {v0:F2}km/h";
+            }
+        }
 
         public void Rescale() {
             var orgSize = CalculateNaturalSize();

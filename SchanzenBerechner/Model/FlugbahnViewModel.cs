@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
@@ -9,7 +10,11 @@ namespace SchanzenBerechner.Model {
 
     public class FlugbahnViewModel: ViewModel {
 
+        readonly Flugbahn _flugbahn;
+
         public FlugbahnViewModel(Schanze schanze, Flugbahn flugbahn) {
+
+            _flugbahn = flugbahn??throw new ArgumentNullException(nameof(flugbahn));
 
             var punkte   = new List<Point>();
             var segments = 100;
@@ -78,6 +83,8 @@ namespace SchanzenBerechner.Model {
             AufprallWinkelSize   = new Size(winkelSize, winkelSize);
 
         }
+
+        public Flugbahn Metrics => _flugbahn.WithScale(1);
 
         public Point           StartPunkt    { get; }
         public PointCollection Punkte        { get; }

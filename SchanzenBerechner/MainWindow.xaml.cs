@@ -37,7 +37,6 @@ namespace SchanzenBerechner {
                 var flugbahn  = Flugbahn.Create(schanze, geschwindigkeit);
                 var viewModel = SettingViewModel.Create(schanze, flugbahn);
 
-                //_viewModel.Settings.Clear();
                 _viewModel.Settings.Add(viewModel);
 
                 OutputTab1.Text = viewModel.DisplayString;
