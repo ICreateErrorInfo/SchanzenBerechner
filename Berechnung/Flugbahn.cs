@@ -43,10 +43,10 @@ namespace Berechnung {
 
         public double Scale { get; }
 
-        public Länge Y(double x) {
+        public Länge Y(Länge x) {
             return Länge.FromMeter(
                 Wurfparabel.Y(
-                    x: x / Scale,
+                    x: x.Meter / Scale,
                     v0: AbsprungGeschwindigkeit.MeterProSekunde,
                     alpha: AbsprungWinkel.Rad,
                     y0: _absprungHöhe.Meter) * Scale);

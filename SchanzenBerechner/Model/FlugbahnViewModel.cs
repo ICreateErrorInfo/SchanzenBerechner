@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 
 using Berechnung;
+using Berechnung.Einheiten;
 
 namespace SchanzenBerechner.Model {
 
@@ -14,46 +15,47 @@ namespace SchanzenBerechner.Model {
             var segments = 100;
             var step     = (int) flugbahn.SprungWeite.Meter / segments;
 
-            // Horizontaler Offset, wenn Schnaze vorhanden
-            var x0 = schanze?.Länge.Meter ?? 0;
+            // Horizontaler Offset, wenn Schanze vorhanden
+            var x0 = schanze?.Länge ?? Länge.Empty;
 
             // Absprungpunkt
-            var x = 0.0;
-            var y = flugbahn.Y(x).Meter;
-            StartPunkt = new Point(x0 + x, y);
+            var x = Länge.Empty;
+            var y = flugbahn.Y(x);
+
+            StartPunkt = ToPoint(x0 + x, y);
             punkte.Add(StartPunkt);
 
             // Bahnpunkte
             for (int i = 1; i <= segments; i++) {
 
-                x = i * step;
-                y = flugbahn.Y(x).Meter;
+                x = Länge.FromMeter(i * step);
+                y = flugbahn.Y(x);
 
-                punkte.Add(new Point(x0 + x, y));
+                punkte.Add(ToPoint(x0 + x, y));
             }
 
             // Aufprallpunkt
-            x = flugbahn.SprungWeite.Meter;
-            y = flugbahn.Y(x).Meter;
+            x = flugbahn.SprungWeite;
+            y = flugbahn.Y(x);
 
-            EndPunkt = new Point(x0 + x, y);
+            EndPunkt = ToPoint(x0 + x, y);
             punkte.Add(EndPunkt);
 
             Punkte = new PointCollection(punkte);
 
-            Scheitelpunkt = new Point(x0 + flugbahn.ScheitelpunktX.Meter, flugbahn.ScheitelpunktY.Meter);
+            Scheitelpunkt = ToPoint(x0 + flugbahn.ScheitelpunktX, flugbahn.ScheitelpunktY);
 
             var winkelSize     = flugbahn.Scale * 0.2;
             var tangentenLänge = flugbahn.Scale;
             // Absprung
-            Matrix m = Matrix.Identity;
+            var m = Matrix.Identity;
             m.Rotate(flugbahn.AbsprungWinkel.Deg);
 
-            Vector v = new Vector(tangentenLänge, 0);
+            var v = new Vector(tangentenLänge, 0);
 
             AbsprungTangentenKontrollpunkt1 = StartPunkt + v;
             AbsprungTangentenKontrollpunkt2 = StartPunkt + v * m;
-            
+
             v = new Vector(winkelSize, 0);
 
             AbsprungWinkelPunkt1 = StartPunkt + v;
@@ -68,12 +70,13 @@ namespace SchanzenBerechner.Model {
 
             AufprallTangentenKontrollpunkt1 = EndPunkt + v;
             AufprallTangentenKontrollpunkt2 = EndPunkt + v * m;
-            
+
             v = new Vector(-winkelSize, 0);
 
             AufprallWinkelPunkt1 = EndPunkt + v;
             AufprallWinkelPunkt2 = EndPunkt + v * m;
             AufprallWinkelSize   = new Size(winkelSize, winkelSize);
+
         }
 
         public Point           StartPunkt    { get; }
@@ -92,6 +95,8 @@ namespace SchanzenBerechner.Model {
         public Point AufprallWinkelPunkt1            { get; }
         public Point AufprallWinkelPunkt2            { get; }
         public Size  AufprallWinkelSize              { get; }
+
+        static Point ToPoint(Länge x, Länge y) => new Point(x.Meter, y.Meter);
 
     }
 
