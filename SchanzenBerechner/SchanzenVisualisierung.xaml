@@ -78,7 +78,8 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Canvas VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                    <Canvas Visibility="{Binding RenderScene, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Left"
                             UseLayoutRounding="true"
                             SnapsToDevicePixels="true"
                             Width="{Binding CanvasWidth}"

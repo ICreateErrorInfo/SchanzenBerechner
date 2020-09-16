@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchanzenBerechner"
-        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         xmlns:model="clr-namespace:SchanzenBerechner.Model"
         ResizeMode="CanResizeWithGrip"
         mc:Ignorable="d"
@@ -33,19 +32,19 @@
     <Grid Margin="10">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="140" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="200" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
         <TabControl Grid.Column="0" Grid.Row="0">
 
-            <TabItem Header="Entfernung u. Höhe">
-                <Grid>
+            <TabItem Header="Entfernung u. Höhe" >
+                <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30*" MinHeight="10" MaxHeight="30" />
                         <RowDefinition Height="Auto" />
@@ -57,7 +56,7 @@
 
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30*" MinWidth="10" MaxWidth="30" />
+                        <ColumnDefinition Width="30" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="50" />
                         <ColumnDefinition Width="30" />
@@ -65,19 +64,19 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Content="Absprung Winkel in Grad" Grid.Row="1" Grid.Column="1" />
-                    <TextBox Name="AbsprungWinkelTextBox_Tab1" Text="22" Grid.Row="1" Grid.Column="2" />
+                    <TextBox Name="AbsprungWinkelTextBox" Text="22" Grid.Row="1" Grid.Column="2" />
 
                     <Label Content="Absprung Geschwindigkeit in km/h" Grid.Row="3" Grid.Column="1" />
-                    <TextBox Name="AbsprungGeschwindigkeitTextBox_Tab1" Text="30" Grid.Row="3" Grid.Column="2" />
+                    <TextBox Name="AbsprungGeschwindigkeitTextBox" Text="30" Grid.Row="3" Grid.Column="2" />
 
                     <Label Content="Absprung Höhe in cm" Grid.Row="5" Grid.Column="1" />
-                    <TextBox Name="AbsprungHöheTextBox_Tab1" Text="20" Grid.Row="5" Grid.Column="2" />
-
+                    <TextBox Name="AbsprungHöheTextBox" Text="20" Grid.Row="5" Grid.Column="2" />
 
                     <Button Content="Berechnen" IsDefault="True"
                             Grid.Column="4"
+                            Padding="4"
                             Grid.Row="5"
-                            Click="OnBerechnenClickTab1" />
+                            Click="OnBerechnenClick" />
 
                 </Grid>
             </TabItem>
@@ -85,9 +84,8 @@
 
         <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
                 Margin="0,5,0,0"
-                BorderThickness="1" 
-                BorderBrush="{StaticResource BorderBrush}"
-                >
+                BorderThickness="1"
+                BorderBrush="{StaticResource BorderBrush}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="500*" MinHeight="200" />
@@ -95,12 +93,8 @@
 
                 <Viewbox Grid.Row="0" Stretch="Uniform">
                     <local:SchanzenVisualisierung x:Name="SchanzenVisualisierung" />
-
                 </Viewbox>
 
-                <CheckBox Grid.Row="0"
-                          Margin="5"
-                          IsChecked="{Binding ElementName=SchanzenVisualisierung, Path=ViewModel.RenderMetrics}" >Metriken anzeigen</CheckBox>
             </Grid>
         </Border>
 
@@ -113,35 +107,94 @@
                     <Label.LayoutTransform>
                         <RotateTransform Angle="90" />
                     </Label.LayoutTransform>
-                    Info
+                    Berechnung Explorer
                 </Label>
             </Expander.Header>
 
-            <Border Background="{StaticResource ToolWindowBackground}"
+            <Border Width="270" Background="{StaticResource ToolWindowBackground}"
                     BorderBrush="{StaticResource BorderBrush}"
                     BorderThickness="1"
                     Padding="5,0,5,5">
-                <Grid Width="250">
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="21" />
-                        <RowDefinition Height="112" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Label Height="24">Test</Label>
+                    <Label Grid.Row="0" FontWeight="Bold">Berechnungen</Label>
                     <ListBox Grid.Row="1"
+                             SelectedItem="{Binding SelectedSetting}"
                              ItemsSource="{Binding Settings}"
                              Margin="0,5,0,0">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Label Content="{Binding DisplayName}"/>
+                                <Border>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox
+                                            ToolTip="Berechnung visualisieren"
+                                            VerticalAlignment="Center"
+                                            IsChecked="{Binding RenderScene}" />
+                                        <ToggleButton
+                                            ToolTip="Metriken anzeigen"
+                                            Margin="3,0" VerticalAlignment="Center"
+                                            IsChecked="{Binding RenderMetrics}">
+                                            <Rectangle Width="16" Height="16">
+                                                <Rectangle.Fill>
+                                                    <DrawingBrush>
+                                                        <DrawingBrush.Drawing>
+                                                            <DrawingGroup>
+                                                                <DrawingGroup.Children>
+                                                                    <GeometryDrawing Brush="#00FFFFFF"
+                                                                        Geometry="F1M16,16L0,16 0,0 16,0z" />
+                                                                    <GeometryDrawing Brush="#FFF6F6F6"
+                                                                        Geometry="F1M10.9998,-0.000199999999999534L10.9998,1.9998 5.0008,1.9998 5.0008,-0.000199999999999534 -0.000199999999999534,-0.000199999999999534 -0.000199999999999534,4.9998 1.9998,4.9998 1.9998,10.9998 -0.000199999999999534,10.9998 -0.000199999999999534,15.9998 5.0008,15.9998 5.0008,13.9998 10.9998,13.9998 10.9998,15.9998 15.9998,15.9998 15.9998,10.9998 14.0008,10.9998 14.0008,4.9998 15.9998,4.9998 15.9998,-0.000199999999999534z" />
+                                                                    <GeometryDrawing Brush="#FF424242"
+                                                                        Geometry="F1M12,12L4,12 4,13 12,13z M3,12L4,12 4,4 3,4z M4,4L12,4 12,3 4,3z M12,4L13,4 13,12 12,12z" />
+                                                                    <GeometryDrawing Brush="#FFF0EFF1"
+                                                                        Geometry="F1M12,12L4,12 4,4 12,4z" />
+                                                                    <GeometryDrawing Brush="#FF00529C"
+                                                                        Geometry="F1M4,12L1,12 1,15 4,15z M15,12L12,12 12,15 15,15z M15,1L12,1 12,4 15,4z M4,4L1,4 1,1 4,1z" />
+                                                                </DrawingGroup.Children>
+                                                            </DrawingGroup>
+                                                        </DrawingBrush.Drawing>
+                                                    </DrawingBrush>
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </ToggleButton>
+                                        <Label Content="{Binding DisplayName}" />
+                                        <Button VerticalAlignment="Center"
+                                                ToolTip="Berechnung löschen"
+                                                Tag="{Binding}"
+                                                Click="OnDeleteSettingClick">
+                                            <Rectangle Width="16" Height="16">
+                                                <Rectangle.Fill>
+                                                    <DrawingBrush>
+                                                        <DrawingBrush.Drawing>
+                                                            <DrawingGroup>
+                                                                <DrawingGroup.Children>
+                                                                    <GeometryDrawing Brush="#00FFFFFF"
+                                                                        Geometry="F1M16,16L0,16 0,0 16,0z" />
+                                                                    <GeometryDrawing Brush="#FFF6F6F6"
+                                                                        Geometry="F1M8.0001,5.1721L3.4571,0.6291 0.629099999999999,3.4571 5.1721,8.0001 0.629099999999999,12.5431 3.4571,15.3711 8.0001,10.8281 12.5431,15.3711 15.3711,12.5431 10.8281,8.0001 15.3711,3.4571 12.5431,0.6291z" />
+                                                                    <GeometryDrawing Brush="#FFA1260C"
+                                                                        Geometry="F1M9.4141,8L13.9571,12.543 12.5431,13.957 8.0001,9.414 3.4571,13.957 2.0431,12.543 6.5861,8 2.0431,3.457 3.4571,2.043 8.0001,6.586 12.5431,2.043 13.9571,3.457z" />
+                                                                </DrawingGroup.Children>
+                                                            </DrawingGroup>
+                                                        </DrawingBrush.Drawing>
+                                                    </DrawingBrush>
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Button>
+                                    </StackPanel>
+                                </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
 
                     <TextBox Grid.Row="2"
                              Margin="0,5,0,0"
-                             x:Name="OutputTab1"
-                             Style="{StaticResource OutputStyle}" Grid.RowSpan="2" />
+                             Text="{Binding SelectedSetting.DisplayString, Mode=OneWay}"
+                             Style="{StaticResource OutputStyle}" />
                 </Grid>
             </Border>
         </Expander>
