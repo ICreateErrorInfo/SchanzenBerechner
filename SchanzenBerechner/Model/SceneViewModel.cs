@@ -69,7 +69,7 @@ namespace SchanzenBerechner.Model {
 
         void UpdateScale() {
 
-            if (Settings.Count == 0) {
+            if (!Settings.Any(s => s.RenderScene)) {
                 return;
             }
 

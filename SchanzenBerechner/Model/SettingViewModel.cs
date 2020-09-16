@@ -109,7 +109,7 @@ namespace SchanzenBerechner.Model {
                 var winkelDeg = _orgSchanze.Absprungwinkel.Deg;
                 var höheCm    = _orgSchanze.Höhe.Centimeter;
                 var v0        = _orgFlugbahn.AbsprungGeschwindigkeit.KilometerProStunde;
-                return $"{winkelDeg:F2}°, H:{höheCm:F2}cm, v: {v0:F2}km/h";
+                return $"{winkelDeg:0.##}°, H: {höheCm:0.##}cm, v: {v0:0.##}km/h";
             }
         }
 

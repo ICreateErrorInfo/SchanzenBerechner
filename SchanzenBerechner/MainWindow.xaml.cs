@@ -41,6 +41,7 @@ namespace SchanzenBerechner {
                 _viewModel.Settings.Add(setting);
                 _viewModel.SelectedSetting = setting;
             } catch (Exception ex) {
+                // TODO Fehler visualisieren
                 SchanzenVisualisierung.ViewModel = null;
             }
 

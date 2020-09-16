@@ -126,18 +126,29 @@
                              SelectedItem="{Binding SelectedSetting}"
                              ItemsSource="{Binding Settings}"
                              Margin="0,5,0,0">
+                        <ListBox.ItemContainerStyle> 
+                            <Style TargetType="ListBoxItem"> 
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter> 
+                            </Style> 
+                        </ListBox.ItemContainerStyle>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Border>
-                                    <StackPanel Orientation="Horizontal">
-                                        <CheckBox
+                                <Border >
+                                    <Grid >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox Grid.Column="0"
                                             ToolTip="Berechnung visualisieren"
                                             VerticalAlignment="Center"
                                             IsChecked="{Binding RenderScene}" />
-                                        <ToggleButton
-                                            ToolTip="Metriken anzeigen"
-                                            Margin="3,0" VerticalAlignment="Center"
-                                            IsChecked="{Binding RenderMetrics}">
+                                        <ToggleButton Grid.Column="1"
+                                                      ToolTip="Metriken anzeigen"
+                                                      Margin="3,0" VerticalAlignment="Center"
+                                                      IsChecked="{Binding RenderMetrics}">
                                             <Rectangle Width="16" Height="16">
                                                 <Rectangle.Fill>
                                                     <DrawingBrush>
@@ -161,11 +172,12 @@
                                                 </Rectangle.Fill>
                                             </Rectangle>
                                         </ToggleButton>
-                                        <Label Content="{Binding DisplayName}" />
-                                        <Button VerticalAlignment="Center"
-                                                ToolTip="Berechnung löschen"
-                                                Tag="{Binding}"
-                                                Click="OnDeleteSettingClick">
+                                        <Label  Grid.Column="2" Content="{Binding DisplayName}" />
+                                        <Button  Grid.Column="3" VerticalAlignment="Center"
+                                                 HorizontalAlignment="Right"
+                                                 ToolTip="Berechnung löschen"
+                                                 Tag="{Binding}"
+                                                 Click="OnDeleteSettingClick">
                                             <Rectangle Width="16" Height="16">
                                                 <Rectangle.Fill>
                                                     <DrawingBrush>
@@ -185,7 +197,7 @@
                                                 </Rectangle.Fill>
                                             </Rectangle>
                                         </Button>
-                                    </StackPanel>
+                                    </Grid>
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
