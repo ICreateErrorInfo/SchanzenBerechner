@@ -92,7 +92,7 @@
                 </Grid.RowDefinitions>
 
                 <Viewbox Grid.Row="0" Stretch="Uniform">
-                    <local:SchanzenVisualisierung x:Name="SchanzenVisualisierung" />
+                    <local:SchanzenVisualisierung DataContext="{Binding}" />
                 </Viewbox>
 
             </Grid>

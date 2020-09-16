@@ -9,9 +9,6 @@ using SchanzenBerechner.Model;
 
 namespace SchanzenBerechner {
 
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow: Window {
 
         readonly SceneViewModel _viewModel;
@@ -21,9 +18,6 @@ namespace SchanzenBerechner {
             DataContext = _viewModel;
 
             InitializeComponent();
-
-            SchanzenVisualisierung.ViewModel = _viewModel;
-
             OnBerechnenClick(this, null);
         }
 
@@ -40,7 +34,7 @@ namespace SchanzenBerechner {
 
                 _viewModel.Settings.Add(setting);
                 _viewModel.SelectedSetting = setting;
-            } catch (Exception _) {
+            } catch (Exception) {
                 // TODO Fehler visualisieren
             }
 
