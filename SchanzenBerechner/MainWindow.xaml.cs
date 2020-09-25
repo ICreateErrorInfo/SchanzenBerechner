@@ -14,8 +14,7 @@ namespace SchanzenBerechner {
         readonly SceneViewModel _viewModel;
 
         public MainWindow() {
-            _viewModel  = new SceneViewModel();
-            DataContext = _viewModel;
+            DataContext = _viewModel = new SceneViewModel();
 
             InitializeComponent();
             OnBerechnenClick(this, null);
